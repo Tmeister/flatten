@@ -1,0 +1,186 @@
+/********************************************************************************
+** Flat Nav for Flatten Theme, Please do NOT use this as a standalone section
+** at less you know what you doing.
+********************************************************************************/
+
+
+@cMBack = #ffffff;
+@cMAlpha = .5;
+@cMText = #000;
+@cMTextHover = @pl-link;
+
+.section-flat-nav{
+
+    /**************************************************************************
+    ** Reset bottom margin on bootstrap spans
+    **************************************************************************/
+    .row > [class*="span"], .row-fluid > [class*="span"], .editor-row > [class*="span"] {
+        margin-bottom: 0px;
+    }
+
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: @zindexNavbar;
+
+
+    background:#ffffff;
+
+    .flat-logo{
+        padding: 0;
+        img{
+            min-height: 60px;
+            min-width: 150px;
+        }
+    }
+
+    .flat-menu-holder{
+        float: right;
+    }
+
+    ul.flat-menu{
+        display: block;
+        z-index: 2px;
+        font-family: @defaultFont;
+
+        clear: both;
+        li{
+            list-style: none;
+            float: left;
+            display: block;
+            position: relative;
+            &:hover{
+
+                a{
+                    color:@cMTextHover;
+                    .transition( all 0.15s ease );
+                    span{
+                        color:@cMTextHover;
+                        .transition( all 0.15s ease );
+                    }
+                }
+
+                ul.sub-menu,
+                ul.children{
+                    .transition(all .15s linear);
+                    opacity: 1;
+                    visibility: visible;
+                    left:0;
+                    z-index: 999;
+                }
+            }
+            &:nth-last-child(-n+3){
+                ul.sub-menu,
+                ul.children{
+                    ul.children,
+                    ul.sub-menu{
+                        left: -100%;
+                    }
+                }
+            }
+
+            a{
+                display: block;
+                color: @cMText;
+                font-size: @buttonFontSize !important;
+                text-align: center;
+                padding: 40px 15px;
+                .transition( all 0.5s ease );
+                &:after{
+                    content:' ▾';
+                }
+                &:only-child{
+                    &:after{
+                        content:'';
+                    }
+                }
+            }
+
+
+            /**********************************************************************
+            ** LEVEL 1 MENU
+            **********************************************************************/
+
+            ul.sub-menu,
+            ul.children{
+                opacity: 0;
+                visibility: hidden;
+                position: absolute;
+                top:101%;
+                background: #F2F4F5;
+                width: 230px;
+                .transition(all .15s linear);
+                z-index: 999;
+                li{
+                    padding:0 20px;
+                    min-width: 190px;
+                    a{
+                        color:@cMText;
+                        text-align: left;
+                        padding: 10px 0px;
+                        font-size: 13px !important;
+                        border-bottom: 1px solid #e1e4e6;
+
+                        &:after{
+                            content:'';
+                        }
+
+                        &:hover{
+                            color:@cMTextHover;
+                        }
+
+                        span{
+                            display: none;
+                        }
+                    }
+
+                    div{
+                        display: none;
+                    }
+                    &:last-child{
+                        a{
+                            border-bottom: 0px solid transparent;
+                        }
+                    }
+                    &:hover{
+                        ul.sub-menu,
+                        ul.children{
+                            .transition(all .15s linear);
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+                    &.grandchild{
+                        &>a{
+                            background: url(@{plChildRoot}/sections/flat-nav/img/sub_menu_arrow_right@2x.png) no-repeat right center;
+                            background-size: 4px 7px;
+                        }
+                        &.toleft{
+                            &>a{
+                                background: url(@{plChildRoot}/sections/flat-nav/img/sub_menu_arrow_left@2x.png) no-repeat left center;
+                                background-size: 4px 7px;
+                            }
+                        }
+                    }
+                }
+
+                /******************************************************************
+                ** LEVEL 2 MENU
+                ******************************************************************/
+                ul.children,
+                ul.sub-menu{
+                    background: #F2F4F5;
+                    opacity: 0;
+                    visibility: hidden;
+                    position: absolute;
+                    left:100%;
+                    top:0px;
+                    z-index: 1000;
+                    .transition(all .15s linear);
+                }
+            }
+        }
+    }
+
+
+}
