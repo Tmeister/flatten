@@ -4,7 +4,7 @@
 require_once( dirname(__FILE__) . '/setup.php' );
 
 // Load our shit in a class cause we're awesome
-class YourTheme {
+class Flatten {
 
 	function __construct() {
 
@@ -13,8 +13,12 @@ class YourTheme {
 		$this->dir = sprintf('/%s', PL_CHILD_DIR);
 
 		// Add a filter so we can build a few custom LESS vars
-		add_filter( 'pless_vars', array(&$this,'custom_less_vars'));
-		add_filter( 'pagelines_foundry', 			array( &$this, 'google_fonts' ) );
+		add_filter( 'pless_vars', 							array( &$this, 'custom_less_vars'));
+		add_filter( 'pagelines_foundry', 					array( &$this, 'google_fonts' ) );
+		add_action( 'pagelines_loop_before_post_content', 	array( &$this, 'add_pre_content'));
+		add_action( 'pagelines_loop_after_post_content', 	array( &$this, 'add_post_content'));
+
+		add_filter( 'widget_title', array(&$this, 'add_hr') );
 
 		$this->init();
 	}
@@ -26,6 +30,31 @@ class YourTheme {
 
 		// Send the user to the Theme Config panel after they activate.
 		add_filter('pl_activate_url', array(&$this,'activation_url'));
+	}
+
+	function add_hr($title){
+		return $title;
+	}
+
+	function add_pre_content($location){
+		global $post;
+	?>
+		<div class="flat_date">
+			<div class="day">
+				<span><?php echo get_the_date('d') ?></span>
+			</div>
+			<div class="month">
+				<?php echo get_the_date('M, Y') ?>
+			</div>
+		</div>
+			<div class="content-wrap">
+	<?php
+	}
+
+	function add_post_content($location){
+	?>
+		</div> <!-- End Content Wrap. -->
+	<?php
 	}
 
 	// Send the user to the Theme Config panel after they activate. Note how link=nb_theme_config is the same name of the array settings. This must match.
@@ -116,4 +145,4 @@ class YourTheme {
 	}
 
 }
-new YourTheme;
+new Flatten;

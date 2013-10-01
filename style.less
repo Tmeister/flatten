@@ -2,6 +2,132 @@
 * Main Styles for Flatten
 */
 
+h1,h2,h3,h4,h5,h6{
+    font-weight: 100;
+}
+
+/*
+* Blog Styles
+*/
+
+.blog,
+.archive,
+.categorie,
+.single{
+    .entry_content{
+        font-size: 14px;
+        .flat_date{
+            float: left;
+            div{
+                &.day{
+                    width: 70px;
+                    height: 70px;
+                    background: #f3f3f3;
+                    .border-radius(100px);
+                    color:@pl-text;
+                    position: relative;
+                    .transition(all 0.2s linear);
+                    &:hover{
+                        background: @pl-link;
+                        color:@pl-base;
+                        .transition(all 0.2s linear);
+
+                    }
+                    span{
+                        top: 23px;
+                        left: 16px;
+                        position: absolute;
+                        font-size: 35px;
+                    }
+
+                }
+                &.month{
+                    text-align: center;
+                }
+            }
+        }
+        .content-wrap{
+            padding-left: 90px;
+        }
+    }
+    h2{
+        &.entry-title{
+            font-size: 35px;
+        }
+    }
+    .post-meta{
+        margin-bottom: 0px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .meta-mode-author{
+        .flat_date{
+            display: none !important;
+        }
+        .content-wrap{
+            padding-left: 0px;
+        }
+    }
+}
+.single{
+    .entry_content{
+        .flat_date{
+            display: none;
+        }
+        .content-wrap{
+            padding-left: 0px;
+        }
+    }
+}
+
+.hentry ul, .hentry ol{
+    font-size: 100%;
+}
+
+.article-wrap{
+    .author-tag{
+        img{
+            max-width: 100px !important;
+            padding:3px;
+            border: 1px solid @pl-link;
+        }
+        .author{
+            text-align: center;
+        }
+    }
+}
+
+/* Widgets */
+.widget{
+    h2, h3{
+        &.widgettitle{
+            border-bottom: 1px solid #f0f0f0 !important;
+            font-size: 20px;
+        }
+        &.widget-title
+        {
+            font-size: 20px;
+        }
+    }
+    ul{
+        font-size: 14px !important;
+        margin: 0px 0px;
+    }
+    .textwidget{
+        font-size: 100%;
+    }
+}
+
+.media-list > li .excerpt {
+    font-size: 90% !important;
+}
+
+.widget_recent_entries,
+.widget_archive,
+.widget_categories,
+.widget_meta{
+    .hover-side-bar-list();
+}
+
 /*
 * IBoxFlat
 */
@@ -148,6 +274,14 @@
 
 
 /*
+* Flax Parallax
+*/
+
+.section-parallax-flat{
+    .flat-buttons();
+}
+
+/*
 * Pro Animations
 */
 .pl-pro-version{
@@ -201,4 +335,20 @@
 .h1{
     font-size:55px;
     font-weight: 100;
+}
+
+.hover-side-bar-list{
+    ul{
+        li{
+            border-bottom: 1px solid #f0f0f0;
+            a{
+                padding:10px 10px;
+                display: block;
+                &:hover{
+                    color:@pl-base;
+                    background:@pl-link;
+                }
+            }
+        }
+    }
 }
