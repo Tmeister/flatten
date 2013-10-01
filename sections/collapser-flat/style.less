@@ -1,0 +1,103 @@
+/******************************************************************************
+** LESS FOR COLLAPSER
+******************************************************************************/
+
+.section-collapser-flat{
+
+    .block-title {
+        font-size: 55px;
+        margin-bottom: 20px;
+        padding: 10px;
+        text-align: center;
+        font-weight: 100;
+        margin-bottom: 40px;
+
+        span {
+            padding: 0 10px;
+        }
+    }
+
+    h3 {
+        margin-bottom: 5px;
+    }
+
+    .center{
+        text-align:center;
+    }
+    .collapser-data{
+        .accordion-group {
+            background: none;
+            margin-bottom: 0px;
+            border: 0 none;
+            .border-radius(0);
+
+            .collapser-heading{
+                margin-bottom: 5px;
+                &:hover, &.active{
+                    .plus-min{
+                        i{
+                            color:#fff;
+                            &:before{
+                                content: "\f067" !important;
+                            }
+                        }
+                    }
+                }
+                a{
+                    color:@pl-text;
+                }
+            }
+
+            .collapser-toggle{
+                display:block;
+                font-size:16px;
+                background-color:@pl-base;
+                .transition( all 0.2s ease );
+                &:hover{
+                    color:@pl-link;
+                }
+            }
+
+            .plus-min{
+                padding: 0;
+                .transition( all 0.2s ease );
+                display: block;
+                height: 45px;
+                width: 45px;
+                .border-radius(100px);
+                float:left;
+                border: 1px solid @pl-link;
+                &:hover, &.active{
+                    .collapser-toggle{
+                        color:#fff;
+                    }
+                }
+
+                i{
+                    color:@pl-link;
+                    width:20px;
+                    height:20px;
+                    padding: 15px 17px;
+                }
+
+            }
+            .title-head{
+                padding: 15px 15px 15px 60px;
+                display: block;
+                font-size: 25px;
+                font-weight: 100;
+            }
+
+            .collapser-inner{
+                p{
+                    padding:0 15px 15px 50px;
+                    margin:0px !important;
+                }
+
+            }
+        }
+    }
+
+
+
+}

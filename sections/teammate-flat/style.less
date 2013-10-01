@@ -1,0 +1,365 @@
+/******************************************************************************
+** Teammate Styles
+******************************************************************************/
+.section-teammate-flat{
+    p{
+        margin:0px;
+    }
+
+    margin-bottom: 20px !important;
+
+    /**************************************************************************
+    ** Cards
+    **************************************************************************/
+
+    .card{
+        position: relative;
+        .team-avatar{
+            position: absolute;
+            top: 35px;
+            height: 100px;
+            width: 100px;
+            background: #fafafa;
+            border: 1px solid #d1d1d1;
+            padding: 3px;
+        }
+        .team-content{
+            margin-left: 50px;
+            padding: 10px 10px 10px 77px;
+            border: 1px solid #d1d1d1;
+            background: #fafafa;
+        }
+        .member-title{
+            max-width: 100%;
+            margin: 0;
+            h2{
+                text-align: left;
+            }
+            span.position {
+                text-align: left;
+            }
+        }
+        .member-bio{
+            max-width: 100%;
+            margin: 0 0;
+            padding: 0px 15px 10px 0;
+        }
+        .user-socials{
+            display: block;
+            position: relative;
+            width: 100%;
+            margin:0px;
+            left: 0px;
+            top: 0px;
+            li{
+                position:relative;
+                .opacity(100);
+                display: block;
+                width: 30px;
+            }
+        }
+    }
+
+    /**************************************************************************
+    ** Square
+    **************************************************************************/
+    .square{
+        .team-item{
+            &:hover{
+                .member-avatar{
+                    background: #fff;
+                    img{
+                        .opacity(75);
+                    }
+                    &.link{
+                        &:hover{
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                z-index: 10;
+                                width: 42px;
+                                height: 42px;
+                                background: url(http://wp3.dev/wp-content/plugins/teammate/sections/teammate/img/image-icon-loupe.png) no-repeat center;
+                                left: 50%;
+                                top: 50%;
+                                margin-top: -18px;
+                                margin-left: -18px;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        .member-wrapper{
+            width: 250px;
+            position: relative;
+            margin: 0 auto;
+            .member-avatar{
+                display: inline-block;
+                padding: 6px;
+                background: #fafafa;
+                border: 1px solid #d1d1d1;
+                img{
+                    display: inline-block;
+                    max-width: 236px;
+                }
+
+            }
+        }
+        .user-socials{
+            top: 210px;
+            left: 10px;
+            position: absolute;
+            li{
+                position: relative;
+                a{
+                    padding-right: 4px;
+                }
+            }
+        }
+    }
+
+
+    /**************************************************************************
+    ** Circle
+    **************************************************************************/
+    .circle{
+        .member-wrapper{
+            padding-top: 10px;
+            width: 200px;
+            margin: 0 auto;
+            clear:both;
+
+            .member-avatar {
+                display: inline-block;
+                .border-radius(100px);
+                padding: 6px;
+                background: #ffffff;
+                border: 3px solid #d1d1d1;
+                position: relative;
+                &:hover {
+                    background: #fff;
+                    img{
+                        .opacity(75);
+                    }
+                }
+                &.link{
+                    &:hover{
+                        &:before {
+                            content: '';
+                            position: absolute;
+                            z-index: 10;
+                            width: 42px;
+                            height: 42px;
+                            background: url(@{plPluginsRoot}/teammate/sections/teammate/img/image-icon-loupe.png) no-repeat center;
+                            left: 50%;
+                            top: 50%;
+                            margin-top: -18px;
+                            margin-left: -18px;
+                        }
+                    }
+
+                }
+
+                img {
+                    display: inline-block;
+                    .border-radius(300px);
+                    z-index: 11;
+                    max-width: 180px;
+                }
+            }
+        }
+    }
+
+    .member-bio{
+        max-width: 250px;
+        margin: 0 auto;
+        padding: 15px 0 0;
+    }
+
+    .member-title{
+        max-width: 200px;
+        margin: 0 auto;
+        h2{
+            font-size: 25px;
+            text-align: center;
+            display: block;
+            margin-bottom: 0px;
+            font-weight: 100;
+        }
+        span.position {
+            display: block;
+            padding-top: 3px;
+            color: #a9a9a9;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    }
+
+    .user-socials{
+        position: relative;
+        width: 250px;
+        margin: 0 auto;
+        display: block;
+        z-index: 90;
+        left:-5px;
+        top:-10px;
+        li{
+            float: left;
+            position:absolute;
+            .opacity(0);
+            a{
+                color:#fff;
+                padding-right: 10px;
+                span{
+
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    .border-radius(50px);
+
+                    i{
+                        font-size: 14px;
+                    }
+                    &:hover{
+                        background-color: #333 !important;
+                    }
+                    &.twitter{
+                        background-color: #34a0d2;
+                        i{
+                            padding: 6px 0 0 5px;
+                        }
+                    }
+                    &.facebook{
+                        background-color: #415898;
+                        i{
+                            padding: 6px 0 0 4px;
+                        }
+                    }
+                    &.google{
+                        background-color: #D74934;
+                        i{
+                            padding: 6px 0 0 5px;
+                        }
+                    }
+                    &.pinterest{
+                        background-color: #CB2026;
+                        i{
+                            padding: 5px 0 0 4px;
+                        }
+                    }
+                    &.linkedin{
+                        background-color: #0173B2;
+                        i{
+                            padding: 4px 0 0 4px;
+                        }
+                    }
+                    &.tumblr{
+                        background-color: #3F607C;
+                        i{
+                            padding: 5px 0 0 4px;
+                        }
+                    }
+                    &.github{
+                        background-color: #161616;
+                        i{
+                            padding: 5px 0 0 4px;
+                        }
+                    }
+                    &.dribbble
+                    {
+                        background-color: #ea4c89;
+                        i{
+                            padding: 5px 0 0 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+/******************************************************************************
+** Media Queries
+******************************************************************************/
+
+@media screen and (max-width: 760px) {
+    .circle{
+        margin-top:40px;
+    }
+    .square{
+        margin-bottom: 30px;
+    }
+    .card{
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 568px)
+and (orientation : portrait){
+    .card{
+        margin-bottom: 60px;
+        .team-avatar{
+            top:-50px !important;
+            left: 100px !important;
+        }
+        .team-content{
+            margin-left: 0px !important;
+            padding: 60px 10px 10px 10px !important;
+            .member-title{
+                h2, .position{
+                    text-align: center !important;
+                }
+
+            }
+        }
+    }
+}
+
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .card{
+        margin-bottom: 60px;
+        margin-top: 30px;
+        .team-avatar{
+            top:-50px !important;
+            left: 75px !important;
+        }
+        .team-content{
+            margin-left: 0px !important;
+            padding: 60px 10px 10px 10px !important;
+            .member-title{
+                h2, .position{
+                    text-align: center !important;
+                }
+
+            }
+        }
+    }
+    .square{
+        .member-wrapper{
+            width: 100% !important;
+            img{
+                max-width: 100% !important;
+            }
+        }
+        .user-socials{
+            top: 110px !important;
+            left: 20px !important;
+            width: 90% !important;
+            li{
+                position: relative;
+                padding-bottom: 5px;
+                a{
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+}

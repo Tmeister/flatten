@@ -7,7 +7,7 @@
 	Class Name: TMFlatNav
 	Demo:
 	Version: 1.0
-	Filter: full-width, misc
+	Filter: full-width, nav
 */
 
 class TMFlatNav extends PageLinesSection {
@@ -22,7 +22,7 @@ class TMFlatNav extends PageLinesSection {
     }
 
     function section_scripts(){
-        wp_enqueue_script('SmartFlatMenu', $this->base_url.'/flat-nav.js', array('jquery'), $this->section_version, true );
+        wp_enqueue_script('SmartFlatMenu', $this->base_url.'/flat-nav.js', array('jquery'), $this->section_version );
     }
 
     function section_head() {
@@ -63,7 +63,15 @@ class TMFlatNav extends PageLinesSection {
                                 $this->flat_nav_fallback( 'flat-menu', 3 );
                             }
                         ?>
+                        <div id="flat-mobile-icon" class="mobile-icon"></div>
                     </nav>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu-template" class="remove-it mobile-visual-menu">
+            <div class="row">
+                <div class="span12">
+                    <?php get_search_form( true ); ?>
                 </div>
             </div>
         </div>

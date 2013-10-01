@@ -14,6 +14,7 @@ class YourTheme {
 
 		// Add a filter so we can build a few custom LESS vars
 		add_filter( 'pless_vars', array(&$this,'custom_less_vars'));
+		add_filter( 'pagelines_foundry', 			array( &$this, 'google_fonts' ) );
 
 		$this->init();
 	}
@@ -38,6 +39,44 @@ class YourTheme {
 	function custom_less_vars($less){
 		return $less;
 	}
+
+	/**
+	 * Adding a custom font from Google Fonts
+	 * @param type $thefoundry
+	 * @return type
+	 */
+	function google_fonts( $thefoundry ) {
+
+		if ( ! defined( 'PAGELINES_SETTINGS' ) )
+			return;
+
+		$fonts = $this->get_fonts();
+		return array_merge( $thefoundry, $fonts );
+	}
+
+	/**
+	 * Parse the external file for the fonts source
+	 * @return type
+	 */
+	function get_fonts( ) {
+		$fonts = pl_file_get_contents( dirname(__FILE__) . '/fonts.json' );
+		$fonts = json_decode( $fonts );
+		$fonts = $fonts->items;
+		$fonts = ( array ) $fonts;
+		$out = array();
+		foreach ( $fonts as $font ) {
+			$out[ str_replace( ' ', '_', $font->family ) ] = array(
+				'name'		=> $font->family,
+				'family'	=> sprintf( '"%s"', $font->family ),
+				'web_safe'	=> true,
+				'google' 	=> $font->variants,
+				'monospace' => ( preg_match( '/\sMono/', $font->family ) ) ? 'true' : 'false',
+				'free'		=> true
+			);
+		}
+		return $out;
+	}
+
 
     // WELCOME MESSAGE - HTML content for the welcome/intro option field
 	function welcome(){

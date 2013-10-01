@@ -1,0 +1,61 @@
+/*
+* Flat  iBox
+*/
+
+body,
+html{
+	font-family: @defaultFont;
+}
+
+.section-ibox-flat{
+
+	.flat-media-text{
+		.ibox-flat-media{
+			display: none;
+		}
+		h4{
+			font-family: @defaultFont;
+			margin:0;
+			margin-bottom: 25px;
+			font-weight: 100;
+		}
+	}
+
+
+	.ibox-flat-icon-border{
+
+		display: inline-block;
+		padding: 25px;
+		border:1px solid @pl-text;
+		.border-radius(10px);
+
+		i.flat-icon{
+			font-size: 50px;
+			width: 50px;
+			height: 50px;
+			display: block;
+		}
+
+		&.media-type-text{
+			border:0px solid #fff !important;
+		}
+	}
+
+	.left-aligned{
+		.ibox-flat-icon-border{
+			padding:10px;
+		}
+		h4{
+			margin:0px;
+		}
+	}
+
+	h4{
+		font-family: @defaultFont;
+		margin:25px 0;
+		font-weight: 100;
+	}
+
+
+
+}
