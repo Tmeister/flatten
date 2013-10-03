@@ -1,0 +1,230 @@
+.section-projects-flat{
+
+    .filters{
+        display: inline-block;
+        padding: 0 0 15px 0;
+        .title{
+            float:left;
+            padding-top: 5px;
+        }
+        .tags-wrapper{
+            background: @pl-base;
+            z-index: 2;
+            float: left;
+            padding-right: 15px;
+            .tags-filter{
+                background: @pl-base;
+                float: left;
+                padding-left: 10px;
+                li{
+                    float: left;
+                    padding: 5px 10px;
+                    background:#f6f6f6;
+                    color:@pl-text;
+                    margin-right: 5px;
+                    cursor:pointer;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    .border-radius(3px);
+                    .box-shadow( inset 0px -1px 0px 0px rgba(0,0,0, 0.1) );
+                    &:hover,
+                    &.active{
+                        background: @pl-link;
+                        color:@pl-base;
+                    }
+                }
+            }
+        }
+        .showing {
+            font-size: 14px;
+            color: #999;
+            line-height: 20px;
+            padding-right: 3px;
+            display: inline;
+            top: 25px;
+            left: 0px;
+            z-index: -1;
+            position: absolute;
+            background: #fff;
+            width: 90%;
+        }
+        .line {
+            border-bottom: 1px solid #f0f0f0;
+            width: 100%;
+            height: 1px;
+        }
+    }
+
+    .pf-content{
+        margin-bottom: 30px;
+        border: 1px solid #e9e9e9;
+        display: none;
+        .border-radius(3px);
+        .media{
+            img{
+                .border-radius(3px 0 0 3px);
+            }
+        }
+        .project-nav{
+            position:relative;
+            margin-bottom: 60px;
+            .nav-wrapper{
+                position: absolute;
+                top: 0;
+                right: 0;
+                a{
+                    background: #F9F9F9;
+                    border: 1px solid #e9e9e9;
+                    color: #B8B8B8;
+                    font-size: 18px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    display: inline-block;
+                    position: absolute;
+                    .transition( all .15s linear);
+                    &:hover{
+                        color:@pl-base;
+                        background: @pl-link;
+                        .transition( all .15s linear);
+                    }
+                    i{
+                        padding:15px 18px;
+                    }
+                    &.navclose{
+                        border-top: none;
+                        border-right: none;
+                        top:0;
+                        right:0;
+                    }
+                    &.arrowright{
+                        border-top: none;
+                        border-right: none;
+                        top: 0;
+                        right: 51px;
+                    }
+                    &.arrowleft{
+                        border-top: none;
+                        border-right: none;
+                        top: 0;
+                        right: 100px;
+                        .border-radius(0 0 0 3px );
+                    }
+                }
+            }
+        }
+
+        .text-wrapper{
+            padding-right: 15px;
+            ul{
+                li{
+                    i{
+                        color: @pl-link;
+                    }
+                }
+            }
+            h3{
+                font-size: 25px;
+                font-weight: 300;
+            }
+            .go-project{
+                margin-top:20px;
+                .btn-large{
+                    padding:10px
+                }
+            }
+        }
+    }
+
+    .project{
+        width: 265px;
+        margin-right: 10px;
+        margin-bottom: 30px;
+        cursor:pointer;
+        float: left;
+        .pf-image{
+            min-width: 265px;
+            min-height:189px;
+            position: relative;
+            overflow: hidden;
+            .border-radius(3px 3px 0 0);
+            img{
+                .transition( all .15s linear);
+            }
+            .mask{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                .opacity(0);
+                .transition( all .15s linear);
+                #translucent > .background( #000000, 0.35);
+
+
+            }
+            .plus{
+
+                position: absolute;
+                top: 200px;
+                left: 105px;
+                width: 50px;
+                height: 50px;
+                .opacity(0);
+                .border-radius(100px);
+                .transition( all .075s ease-in-out);
+                #translucent > .background( #000000, 0.75);
+
+                i{
+                    color:#fff;
+                    font-size: 22px;
+                    .opacity(75);
+                    top:15px;
+                    left:15px;
+                    position: absolute;
+                }
+
+
+            }
+        }
+        .pf-info{
+            padding: 30px 20px;
+            background: #f6f6f6;
+            text-align: center;
+            .box-shadow(inset 0 -1px 0 0 rgba(0,0,0,.05));
+            .border-radius(0 0 3px 3px);
+            .transition( all .15s linear);
+
+            h5{
+                font-size: 15px;
+                font-weight: 300;
+            }
+            h4{
+                font-size: 18px;
+                font-weight: 300;
+            }
+        }
+         &:hover{
+            .pf-image{
+                img{
+                    .scale(1.05);
+                    .transition( all .15s linear);
+                }
+                .mask{
+                    .opacity(100);
+                    .transition( all .15s linear);
+                }
+                .plus{
+                    top: 65px;
+                    left: 105px;
+                    .transition( all .075s ease-in-out);
+                    .opacity(100);
+                }
+            }
+            .pf-info{
+                background: @pl-link;
+                color: @pl-base;
+                .transition( all .1s linear);
+            }
+        }
+    }
+}

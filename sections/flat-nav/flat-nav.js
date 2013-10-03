@@ -11,8 +11,6 @@ $.fn.smartFlatMenu = function(options) {
     var lastItems = $menu.find('>:nth-last-child(-n+3)');
     var lastItem =  $menu.find('>:nth-last-child(-n+1)');
     var maxLeft =  $(lastItem).position().left +  $(lastItem).width();
-    console.log( lastItem )
-    console.log( maxLeft );
     var windowHeight;
     var currentMobileItem = false;
     var currentMobileSubItem = false;
@@ -20,6 +18,8 @@ $.fn.smartFlatMenu = function(options) {
     /* Scroll handle to change the menu size*/
 
     $(window).scroll(function(event) {
+
+            if(window.loadingproject){return}
 
             var newHeight = 100 - ($(window).scrollTop());
             var newPadding = ( 40 - ($(window).scrollTop()) / 2);
@@ -47,7 +47,7 @@ $.fn.smartFlatMenu = function(options) {
         });
 
         if( ( $el.position().left + $submenu.width() ) > maxLeft ){
-            $submenu.css({'left': (maxLeft - $el.position().left) - ( $submenu.width() - $el.width() ) });
+            $submenu.css({'left': ($submenu.width()*-1) + $el.width()});
             $submenu.find('>li>a').css({'text-align': 'right'});
             $submenu.find('li').each(function(index, el) {
                 $li = $(el);

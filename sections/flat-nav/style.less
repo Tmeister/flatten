@@ -25,10 +25,6 @@
         margin-bottom: 0px;
     }
 
-    [class^="icon-"], [class*=" icon-"]{
-        display: none !important;
-    }
-
     position: fixed;
     top: 0px;
     width: 100%;
@@ -50,6 +46,9 @@
     }
 
     ul.flat-menu{
+        [class^="icon-"], [class*=" icon-"]{
+            display: none !important;
+        }
         display: block;
         z-index: 2px;
         font-family: @defaultFont;

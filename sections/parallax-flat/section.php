@@ -10,9 +10,6 @@
     Filter: full-width, misc
 */
 
-/**
-*
-*/
 class TMParallaxFlat extends PageLinesSection{
 
     function section_persistent(){}

@@ -5,6 +5,10 @@
 h1,h2,h3,h4,h5,h6{
     font-weight: 100;
 }
+#mobile-menu-template{
+    display: none;
+    .opacity(0);
+}
 
 /*
 * Blog Styles
@@ -68,7 +72,8 @@ h1,h2,h3,h4,h5,h6{
         }
     }
 }
-.single{
+.single,
+.page{
     .entry_content{
         .flat_date{
             display: none;
@@ -150,7 +155,7 @@ h1,h2,h3,h4,h5,h6{
             }
             h4{
                 font-size: 25px !important;
-                font-weight: 100;
+                font-weight: 300;
                 margin-bottom: 20px;
 
             }
@@ -224,7 +229,7 @@ h1,h2,h3,h4,h5,h6{
     }
     .highlight-subhead{
         font-size: 25px !important;
-        font-weight: 100;
+        font-weight: 300 !important;
     }
 }
 
@@ -272,6 +277,9 @@ h1,h2,h3,h4,h5,h6{
     }
 }
 
+.section-projects-flat{
+    .flat-buttons();
+}
 
 /*
 * Flax Parallax
@@ -304,10 +312,10 @@ h1,h2,h3,h4,h5,h6{
     .btn-large{
         padding: 15px 25px;
         font-size: 16px;
-        font-weight: 100;
+        font-weight:300;
     }
     .btn-primary{
-        background-color: #0079FF;
+        background-color: @pl-link;
         background-image: none;
     }
     .btn-warning{
@@ -352,3 +360,4 @@ h1,h2,h3,h4,h5,h6{
         }
     }
 }
+
