@@ -123,7 +123,7 @@ jQuery(document).ready(function($) {
         $tags.html('');
 
         jQuery.each(data.tags, function(index, el) {
-            $tags.append(jQuery('<li/>').append(jQuery('<i/>').addClass('icon-ok')).append(' '+el));
+            $tags.append(jQuery('<li/>').append(jQuery('<i/>').addClass('icon-long-arrow-right')).append(' '+el));
         });
         $projectDetails.slideDown('slow', function(){
             window.loadingproject = false;
