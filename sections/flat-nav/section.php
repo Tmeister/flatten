@@ -41,8 +41,8 @@ class TMFlatNav extends PageLinesSection {
             <div class="row menu-<?php echo $this->meta['clone']?>">
                 <div class="span3">
                     <div class="flat-logo">
-                        <a href="#">
-                            <img src="http://dummyimage.com/250x100/f1f1f1/000000" alt="">
+                        <a href="<?php echo get_site_url(); ?>" class="flat_logo">
+                            <img src="<?php echo $this->opt('flat_logotype') ?>" alt="" data-sync="flat_logotype">
                         </a>
                     </div>
                 </div>
