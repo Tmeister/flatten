@@ -170,7 +170,7 @@ class CollapserFlatTm extends PageLinesSection
         $image = plmeta('tm_collapser_image', $inner_oset);
     ?>
         <div class="collapser-block<?php echo $clone_id?>">
-            <h3 class="block-title">
+            <h3 class="block-title zmb">
                 <span data-sync="tm_collapser_title"><?php echo $title ?></span>
             </h3>
             <div class="row" id="<?php echo $parent ?>-wrapper">

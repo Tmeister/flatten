@@ -39,7 +39,7 @@ class TMPortfolioFlat extends PageLinesSection{
     }
 
     function section_template(){
-        $limit = ( $this->opt($this->id.'_boxes') ) ? $this->opt($this->id.'_boxes')    : 4;
+        $limit = ( $this->opt($this->id.'_items') ) ? $this->opt($this->id.'_items')    : 12;
         $sets  = ( $this->opt($this->id.'_tax'))    ? $this->opt($this->id.'_tax')      : array();
 
         if( count($sets) ){
@@ -57,11 +57,6 @@ class TMPortfolioFlat extends PageLinesSection{
             echo setup_section_notify($this, __('Sorry,there are no post to display.', 'flatten'), get_admin_url().'edit.php?post_type='.$this->custom_post_type, __('Please create some posts', 'flatten'));
             return;
         }
-
-        $span = ( $this->opt($this
-
-            ->id.'_span') ) ? $this->opt($this->id.'_span') : '4';
-        $span = 12 / $span;
 
         $showlabel = ( $this->opt($this->id.'_show') ) ? $this->opt($this->id.'_show') : 'Showing';
         $alllabel = ( $this->opt($this->id.'_all') ) ? $this->opt($this->id.'_all') : 'All';
@@ -119,7 +114,6 @@ class TMPortfolioFlat extends PageLinesSection{
                 </div>
             </div>
             <div class="boxes-wrapper clear">
-                <?php for ($i=0; $i < 5; $i++) :?>
                 <?php foreach ($posts as $post):
                     $cats = wp_get_post_terms($post->ID, $this->tax_id);
                     $class = '';
@@ -141,7 +135,6 @@ class TMPortfolioFlat extends PageLinesSection{
                         </div>
                     </div>
                 <?php endforeach; ?>
-            <?php endfor; ?>
             </div>
         </div>
 

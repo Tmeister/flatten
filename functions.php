@@ -56,11 +56,9 @@ class Flatten {
 		</div> <!-- End Content Wrap. -->
 	<?php
 	}
-
-	// Send the user to the Theme Config panel after they activate. Note how link=nb_theme_config is the same name of the array settings. This must match.
 	function activation_url( $url ){
 
-	    $url = home_url() . '?tablink=theme&tabsublink=nb_theme_config';
+	    $url = home_url() . '?tablink=theme&tabsublink=flatten_config';
 	    return $url;
 	}
 
@@ -120,28 +118,68 @@ class Flatten {
 	// Theme Options
 	function theme_options(){
 
-		$options = array();
+		$hi = "
+			<h4>Thanks for your purchase.</h4>
+			<div>Your new and shiny theme is ready to be used. <br/>Please be aware of the instructions for a optimal setup.</div>
+		";
 
-		$options['flatten_config'] = array(
-		   'pos'                  => 50,
-		   'name'                 => __('Flatten Theme','flatten'),
-		   'icon'                 => 'icon-rocket',
-		   'opts'                 => array(
-		   		array(
-		       	    'type'        => 'template',
-            		'title'       => __('Welcome to My Theme','flatten'),
-            		'template'    => $this->welcome()
-		       	),
-		       	array(
-		           'type'         => 'color',
-		           'title'        => __('Sample Color','flatten'),
-		           'key'          => 'my_custom_color',
-		           'label'        => __('Sample Color','flatten'),
-		           'default'      =>'#FFFFFF'
-		       	),
-		   )
+		$step1 = "
+			<h4>Import the configuration</h4>
+			<div>
+					<p>
+						1. Please click on the \"Import Config\" menu item on the left.<br>
+						2. Locate the yellow button \"Load Child  Theme Config\" and click on it.<br>
+						3. A popup will show, click on the \"Ok\" button.<br>
+						4. Once you've completed this action, you may want to publish these changes to your live site.<br>
+					</p>
+			</div>
+		";
+
+		$step2 = "
+			<h4>Import demo content</h4>
+			<div>
+					<p>
+						1. Please <a href=\"" .home_url( "/wp-content/themes/flatten/flatten-demo-content.zip")."\">click here</a> to get the demo content file.<br>
+						2. Unzip the file. A new file called flatten-demo-content.xml will be created.<br>
+						3. Within your wp admin area, go to the Menu Tool -> Import.<br>
+						4. From the list options, click on WordPress.<br>
+						5. A popup will show asking for install the \"WordPress Importer\" plugin, click \"Install Now\".<br>
+						6. Activate plugin and Run Importer<br>
+						7. In the \"Choose a file from your computer: \" choose the file from the point 2.<br>
+						8. Click Upload file and import.<br>
+						9. In the \"Assign Authors\" check the \"Download and import file attachments\".<br>
+						10. Click Submit.
+					</p>
+			</div>
+		";
+		$soptions = array();
+		$soptions['flatten_config'] = array(
+			'pos'   => 1,
+		    'name'  => 'Flatten',
+		    'icon'  => 'icon-pagelines',
+		    'opts'  => array(
+		        array(
+		        	'key' => 'welcome',
+		        	'type' => 'template',
+		        	'template' => $hi,
+		        	'title' => 'Hi, Welcome to Flatten'
+		        ),
+		        array(
+		        	'key' => 'step1',
+		        	'type' => 'template',
+		        	'template' => $step1,
+		        	'title' => 'Step 1 - Child Theme configuration'
+		        ),
+		        array(
+		        	'key' => 'step2',
+		        	'type' => 'template',
+		        	'template' => $step2,
+		        	'title' => 'Step 2 - Demo content'
+		        )
+
+		    )
 		);
-		pl_add_theme_tab($options);
+		pl_add_theme_tab( $soptions );
 	}
 
 }

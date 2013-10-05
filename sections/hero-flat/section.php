@@ -197,7 +197,7 @@ class tmHeroFlat extends PageLinesSection {
 
 		$hero_title = ($hero_title) ? $hero_title : __('The Flat Hero!', 'pagelines');
 		$hero_tag = ($hero_tag) ? $hero_tag : __('Now just set up your Hero section options', 'pagelines');
-		$hero_text = ($hero_text) ? $hero_text : __('Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'pagelines');
+		$hero_text = ($hero_text) ? apply_filters( 'the_content', $hero_text) : __('Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'pagelines');
 
 
 
