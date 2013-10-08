@@ -283,7 +283,7 @@ class TMPortfolioFlat extends PageLinesSection{
 
 
         $pt_tab = array(
-            'id'        => 'tm_collapser_metatab',
+            'id'        => 'tm_projects_metatab',
             'name'      => __("Please fill the fields below", 'flatten') ,
             'icon'      => $this->icon,
         );

@@ -81,6 +81,7 @@ $.fn.smartFlatMenu = function(options) {
         if( matches ){
             $el.removeClass(matches[0]);
             $('<i/>').addClass(matches[0]).prependTo( $el.find('>a') );
+            $('<span/>').addClass('colored').prependTo($el);
         }
     });
 

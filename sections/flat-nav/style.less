@@ -6,7 +6,7 @@
 
 @cMBack = #ffffff;
 @cMAlpha = .5;
-@cMText = #000;
+@cMText = @pl-text;
 @cMTextHover = @pl-link;
 @cMobileTextHover = @pl-link ;
 
@@ -38,6 +38,7 @@
         img{
             min-height: 60px;
             min-width: 150px;
+            max-height: 100px;
         }
     }
 
@@ -118,7 +119,7 @@
                 visibility: hidden;
                 position: absolute;
                 top:101%;
-                background: #F2F4F5;
+                background: #f6f6f6;
                 width: 230px;
                 .transition(all .15s linear);
                 z-index: 999;
@@ -250,42 +251,75 @@
             border-bottom: 1px solid #36373c;
             position: relative;
 
+            span.colored{
+                display: block;
+                position: absolute;
+                top: 0px;
+                left:0px;
+                width: 45px;
+                height: 41px;
+                .transition( all 0.5s ease );
+            }
+            &.orange{
+                span.colored{
+                    background: #F2836B;
+                }
+            }
+            &.yellow{
+                span.colored{
+                    background: #FFCE70;
+                }
+            }
+            &.green{
+                span.colored{
+                    background: #87CCC0;
+                }
+            }
+            &.light-green{
+                span.colored{
+                    background: #9AD172;
+                }
+            }
+            &.blue{
+                span.colored{
+                    background: #66BCD9;
+                }
+            }
             a{
                 text-align: left;
                 display: block;
                 padding: 10px 10px 10px 0px;
                 position: relative;
-                background: url(@{plChildRoot}/sections/flat-nav/img/sub_menu_arrow_down_white@2x.png) no-repeat right center;
-                background-size: 7px 4px;
-
+                &:nth-last-child(2),
                 &:only-child{
-                    background:none;
+                    background: url(@{plChildRoot}/sections/flat-nav/img/sub_menu_arrow_down_white@2x.png) no-repeat right center;
+                    background-size: 7px 4px;
                 }
 
                 i{
                     left: 0px;
                     top: 11px;
                     font-size: 20px;
-                    color:@cMobileTextHover;
+                    color:#fff;
                     position: absolute;
                 }
                 span{
-                    padding-left: 30px;
+                    padding-left: 50px;
                     color:#fff;
                 }
             }
 
             &:hover,
             &:active{
-                background: #27282C;
-                a{
-                    span{
-                        color:@cMobileTextHover;
-                    }
+                span.colored{
+                    width: 100%;
+                    .transition( all 0.5s ease );
                 }
+                .transition( all 0.5s ease );
                 ul.sub-menu,
                 ul.children{
                     li{
+                        background: #27282C;
                         a{
                             span{
                                 color:#fff;
