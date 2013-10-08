@@ -152,6 +152,23 @@ class Flatten {
 					</p>
 			</div>
 		";
+		$step3 = "
+			<h4>Home and Blog</h4>
+			<div>
+					<p>
+						1. Finally set the home and blog pages.<br>
+						2. Go to the \"Settings\" > \"Reading menu\".<br>
+						3. Select the \"A static page (select below)\".<br>
+						4. In the \"Front Page\" option select \"Home\".<br>
+						5. In the \"Posts Page\" option select \"Blog\".<br>
+						6. Click  \"Save Changes\".<br>
+						7. Reload your site.<br>
+
+
+
+					</p>
+			</div>
+		";
 		$soptions = array();
 		$soptions['flatten_config'] = array(
 			'pos'   => 1,
@@ -175,7 +192,14 @@ class Flatten {
 		        	'type' => 'template',
 		        	'template' => $step2,
 		        	'title' => 'Step 2 - Demo content'
+		        ),
+		        array(
+		        	'key' => 'step3',
+		        	'type' => 'template',
+		        	'template' => $step3,
+		        	'title' => 'Step 3 - Home and Blog Pages'
 		        )
+
 
 		    )
 		);
