@@ -10,10 +10,10 @@ $.fn.smartFlatMenu = function(options) {
     var $menu = $this.find('.flat-menu');
     var lastItems = $menu.find('>:nth-last-child(-n+3)');
     var lastItem =  $menu.find('>:nth-last-child(-n+1)');
-    var maxLeft =  $(lastItem).position().left +  $(lastItem).width();
     var windowHeight;
     var currentMobileItem = false;
     var currentMobileSubItem = false;
+    var wait;
 
     /* Scroll handle to change the menu size*/
 
@@ -27,6 +27,15 @@ $.fn.smartFlatMenu = function(options) {
             var newAlpha = (newPadding + 65) / 100;
             var color = (newAlpha < 1) ? '240, 242, 244' : '255, 255, 255';
             var border = (newAlpha < 1) ? '#ddd' : '#fff';
+
+            if( jQuery('body').hasClass('display-boxed') ){
+                if( newAlpha < 1 ){
+                    jQuery('.section-flat-nav').css({'top':'0px'});
+                }else{
+                    jQuery('.section-flat-nav').css({'top':'30px'});
+                }
+            }
+
             $('.flat-logo img').height(newHeight);
             $('.flat-menu > li > a').css({'padding': newPadding+'px 15px'});
             $('.mobile-icon').css({'margin': newPadding+'px 0px'});
@@ -35,28 +44,33 @@ $.fn.smartFlatMenu = function(options) {
 
     /* Align the sub-menus */
 
-    $.each(lastItems, function(index, val) {
-        $el = $(this);
-        $submenu = $el.find('>.sub-menu');
+    wait = setInterval( function(){
+        maxLeft =  $(lastItem).position().left +  $(lastItem).width();
+        $.each(lastItems, function(index, val) {
+            $el = $(this);
+            $other = $(this)
+            $submenu = $el.find('>.sub-menu');
 
-        $submenu.find('li').each(function(index, el) {
-            $li = $(el);
-            if( $li.find('ul').length ){
-                $li.addClass('grandchild');
-            }
-        });
-
-        if( ( $el.position().left + $submenu.width() ) > maxLeft ){
-            $submenu.css({'left': ($submenu.width()*-1) + $el.width()});
-            $submenu.find('>li>a').css({'text-align': 'right'});
             $submenu.find('li').each(function(index, el) {
                 $li = $(el);
                 if( $li.find('ul').length ){
-                    $li.addClass('grandchild toleft');
+                    $li.addClass('grandchild');
                 }
             });
-        }
-    });
+
+            if( ( $el.position().left + $submenu.width() ) > maxLeft ){
+                $submenu.css({'left': ($submenu.width()*-1) + $el.width()});
+                $submenu.find('>li>a').css({'text-align': 'right'});
+                $submenu.find('li').each(function(index, el) {
+                    $li = $(el);
+                    if( $li.find('ul').length ){
+                        $li.addClass('grandchild toleft');
+                    }
+                });
+            }
+        });
+        clearInterval(wait)
+    }, 500);
 
     /* Clone the Main menu*/
     $this.windowHeight = $(window.top).height();

@@ -524,3 +524,35 @@ h1,h2,h3,h4,h5,h6{
 @media screen and (max-width: 768px) and (orientation: portrait) {
 
 }
+
+
+/*
+* BOXED
+*/
+body{
+    &.display-boxed{
+        .section-flat-nav{
+            width: @pl-page-width;
+            top:30px;
+            .transition(all .5s ease) !important;
+            li{
+                display: block;
+                width: auto;
+            }
+        }
+        .boxed-wrap{
+            margin: 30px auto !important;
+            .box-shadow( 0 0 5px #888888 );
+        }
+        .section-projects-flat{
+            .project{
+                width: 257px;
+                .pf-image{
+                    min-width: 257px;
+                    min-height: 150px;
+                }
+            }
+        }
+    }
+
+}
