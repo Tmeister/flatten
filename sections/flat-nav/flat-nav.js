@@ -28,19 +28,20 @@ $.fn.smartFlatMenu = function(options) {
             var color = (newAlpha < 1) ? '240, 242, 244' : '255, 255, 255';
             var border = (newAlpha < 1) ? '#ddd' : '#fff';
 
+            $('.flat-logo img').height(newHeight);
+            $('.flat-menu > li > a').css({'padding': newPadding+'px 15px'});
+            $('.section-flat-nav').css({'background': 'rgba('+color+', '+newAlpha+')', 'border-bottom': '1px solid '+border} );
+            $('.mobile-icon').css({'margin': newPadding+'px 0px'});
+
             if( jQuery('body').hasClass('display-boxed') ){
                 if( newAlpha < 1 ){
                     jQuery('.section-flat-nav').css({'top':'0px'});
-                    newPadding = '-10';
+                    $('.mobile-icon').css({'margin': '-10px 0px'});
                 }else{
                     jQuery('.section-flat-nav').css({'top':'30px'});
                 }
             }
 
-            $('.flat-logo img').height(newHeight);
-            $('.flat-menu > li > a').css({'padding': newPadding+'px 15px'});
-            $('.mobile-icon').css({'margin': newPadding+'px 0px'});
-            $('.section-flat-nav').css({'background': 'rgba('+color+', '+newAlpha+')', 'border-bottom': '1px solid '+border} );
     });
 
     /* Align the sub-menus */
