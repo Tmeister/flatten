@@ -3,9 +3,9 @@
 	Section: Flat Nav
 	Author: Enrique Chavez
 	Author URI: http://enriquechavez.co
-	Description: Inline Description
+	Description: Menu section for Flatten with a beautiful mobile design.
 	Class Name: TMFlatNav
-	Demo:
+	Demo: http://dms.tmeister.net/flatten
 	Version: 1.0
 	Filter: full-width, nav
 */

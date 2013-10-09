@@ -3,9 +3,9 @@
     Section: PortfolioFlat
     Author: Enrique Chavez
     Author URI: http://enriquechavez.co
-    Description: Inline Description
+    Description: Show your work in a beautiful way with this section, PortfolioFlat can be use for show a photographer's work, a designer's work or just to show personal images using great transitions and effects driven by CSS3 and jQuery, also, all happens in just one site thanks to ajax.
     Class Name: TMPortfolioFlat
-    Demo:
+    Demo: http://dms.tmeister.net/flatten
     Version: 1.0
     Filter: misc
 */

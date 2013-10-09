@@ -3,9 +3,9 @@
     Section: ParallaxFlat
     Author: Enrique Chavez
     Author URI: http://enriquechavez.co
-    Description: Inline Description
+    Description: Parallax background section to show relevant information, the section support: title, subtitle and custom content, also support shortcodes.
     Class Name: TMParallaxFlat
-    Demo:
+    Demo: http://dms.tmeister.net/flatten
     Version: 1.0
     Filter: full-width, misc
 */
