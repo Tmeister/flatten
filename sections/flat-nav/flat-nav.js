@@ -31,6 +31,7 @@ $.fn.smartFlatMenu = function(options) {
             if( jQuery('body').hasClass('display-boxed') ){
                 if( newAlpha < 1 ){
                     jQuery('.section-flat-nav').css({'top':'0px'});
+                    newPadding = '-10';
                 }else{
                     jQuery('.section-flat-nav').css({'top':'30px'});
                 }
