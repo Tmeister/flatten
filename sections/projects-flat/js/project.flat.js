@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
         }
         $currentProject = $project;
         if(!noScroll){
-            $('html,body').animate({scrollTop: ( $("#filters-anchor").offset().top) - 100},'slow', function(){
+            $('html,body').animate({scrollTop: ( $("#filters-anchor").offset().top) - 93},'slow', function(){
                 $projectDetails.slideUp('slow', function(){
                     loadNewItem( id );
                 });
