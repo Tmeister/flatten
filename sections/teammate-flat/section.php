@@ -301,7 +301,7 @@ class TMTeammateFlat extends PageLinesSection {
                     array(
                         'key'   => 'team_m_bio_'.$i,
                         'type'  => 'textarea',
-                        'title' => __('Teammate short bio.')
+                        'title' => __('Teammate short bio.', 'tmteammate')
                     )
                 )
             );

@@ -323,15 +323,15 @@ class TMSORevolution extends PageLinesSection
 			),
 			'tmrv_image' => array(
 				'type'       => 'image_upload',
-				'inputlabel' => __('Caption Image'),
-				'title'      => 'Caption Image',
+				'inputlabel' => __('Caption Image', 'flatten'),
+				'title'      => __('Caption Image', 'flatten'),
 				'shortexp'   => __('The caption image value', 'flatten'),
 				'exp'        => __('If you chose "Image" in the "Caption type" option, the value on this field will be use, regardless of the value of the text or video fields.', 'flatten')
  			),
  			'tmrv_video' => array(
  				'type'       => 'textarea',
-				'inputlabel' => __('Caption Video'),
-				'title'      => 'Caption Video',
+				'inputlabel' => __('Caption Video', 'flatten'),
+				'title'      => __('Caption Video', 'flatten'),
 				'shortexp'   => __('The caption video value', 'flatten'),
 				'exp'        => __('If you chose "Video" in the "Caption type" option, the value on this field will be use, regardless of the value of the text or image fields.', 'flatten')
  			),
@@ -351,7 +351,7 @@ class TMSORevolution extends PageLinesSection
 					'lfr'          => array('name' => __('Long from Right', 'flatten') ),
 					'lfl'          => array('name' => __('Long from Left', 'flatten') ),
 					'fade'         => array('name' => __('Fading', 'flatten') ),
-					'randomrotate' => array('name' => __('Fade in, Rotate from a Random position and Degree') )
+					'randomrotate' => array('name' => __('Fade in, Rotate from a Random position and Degree', 'flatten') )
 				)
 			),
 			'tmrv_outgoing_animation' => array(
@@ -391,23 +391,23 @@ class TMSORevolution extends PageLinesSection
 				'type'         => 'select',
 				'inputlabel'   => __('Caption style', 'flatten'),
 				'title'        => __('Caption style', 'flatten'),
-				'shortexp'     => __('Select the caption style'),
+				'shortexp'     => __('Select the caption style', 'flatten'),
 				'exp'          => __('This option will be used only for text captions.', 'flatten'),
 				'selectvalues' => array(
-					'big_base'        => array('name' => __('Big Base Color')),
-					'big_link'        => array('name' => __('Big Link Color')),
-					'gray_box_right'  => array('name' => __('Gray Box Color Right Align')),
-					'gray_box'        => array('name' => __('Gray Box Color Left Align')),
-					'big_white'       => array('name' => __('Big White')),
-					'big_orange'      => array('name' => __('Big Orange')),
-					'big_black'       => array('name' => __('Big Black')),
-					'medium_white'    => array('name' => __('Medium Grey')),
-					'medium_text'     => array('name' => __('Medium White')),
-					'small_white'     => array('name' => __('Small White')),
-					'large_text'      => array('name' => __('Large White')),
-					'very_large_text' => array('name' => __('Very Large White')),
-					'very_big_white'  => array('name' => __('Very Big White')),
-					'very_big_black'  => array('name' => __('Very Big Black')),
+					'big_base'        => array('name' => __('Big Base Color', 'flatten')),
+					'big_link'        => array('name' => __('Big Link Color', 'flatten')),
+					'gray_box_right'  => array('name' => __('Gray Box Color Right Align', 'flatten')),
+					'gray_box'        => array('name' => __('Gray Box Color Left Align', 'flatten')),
+					'big_white'       => array('name' => __('Big White', 'flatten')),
+					'big_orange'      => array('name' => __('Big Orange', 'flatten')),
+					'big_black'       => array('name' => __('Big Black', 'flatten')),
+					'medium_white'    => array('name' => __('Medium Grey', 'flatten')),
+					'medium_text'     => array('name' => __('Medium White', 'flatten')),
+					'small_white'     => array('name' => __('Small White', 'flatten')),
+					'large_text'      => array('name' => __('Large White', 'flatten')),
+					'very_large_text' => array('name' => __('Very Large White', 'flatten')),
+					'very_big_white'  => array('name' => __('Very Big White', 'flatten')),
+					'very_big_black'  => array('name' => __('Very Big Black', 'flatten')),
 				)
 			),
 			'tmrv_speed_intro' => array(
