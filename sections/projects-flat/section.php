@@ -230,7 +230,6 @@ class TMPortfolioFlat extends PageLinesSection{
         $columns = array(
             "cb"              => "<input type=\"checkbox\" />",
             "title"           => "Title",
-            "collapser_media" => "Media",
             $this->tax_id     => "Project Set"
         );
         $this->post_type = new PageLinesPostType( $this->custom_post_type, $args, $taxonomies, $columns, array(&$this, 'column_display') );
@@ -241,9 +240,6 @@ class TMPortfolioFlat extends PageLinesSection{
         switch ($column){
             case $this->tax_id:
                 echo get_the_term_list($post->ID, $this->tax_id, '', ', ','');
-                break;
-            case 'collapser_media':
-                echo '<img src="'.m_pagelines($this->id.'_image', $post->ID).'" style="max-width: 300px; max-height: 100px" />';
                 break;
         }
     }

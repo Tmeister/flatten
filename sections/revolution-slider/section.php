@@ -115,8 +115,13 @@ class TMSORevolution extends PageLinesSection
 							$transition  = ( plmeta('tmrv_transition', $io ) )  ? plmeta('tmrv_transition', $io) : 'boxfade';
 							$slots       = ( plmeta('tmrv_slots', $io ) )  ? plmeta('tmrv_slots', $io) : '1';
 							$use_image   = (plmeta('tmrv_transparent', $io) == 'off') ? true : false;
-							$image       = ( plmeta('tmrv_background_slider', $io) ) ? plmeta('tmrv_background_slider', $io) : false;
-							$img_src     = ( $image || ($use_image && $image ) ) ? plmeta('tmrv_background_slider', $io) : '/wp-content/themes/sophistique/images/transparent.png';
+
+							//$image       = ( plmeta('tmrv_background_slider', $io) ) ? plmeta('tmrv_background_slider', $io) : false;
+							$image  	 = $this->find_and_show_image( $post->ID, 'tmrv_background_slider', true);
+
+							$img_src     = ( $image || ($use_image && $image ) ) ? $image : '/wp-content/themes/flatten/images/transparent.png';
+
+
 							$masterspeed = ( plmeta('tmrv_masterspeed', $io ) )  ? plmeta('tmrv_masterspeed', $io) : '300';
 							$link        = (plmeta('tmrv_link', $io)) ? 'data-link="' . plmeta('tmrv_link', $io). '"' : '';
 							$link_target = (plmeta('tmrv_link_target', $io)) ? 'data-target="'. plmeta('tmrv_link_target', $io) . '"' : '';
@@ -136,7 +141,8 @@ class TMSORevolution extends PageLinesSection
 									//Types
 									$tmrv_caption_type = ( plmeta('tmrv_caption_type', $ioc) ) ? plmeta('tmrv_caption_type', $ioc) : 'text';
 									$tmrv_text         = ( plmeta('tmrv_text', $ioc) ) ? plmeta('tmrv_text', $ioc) : '';
-									$tmrv_image        = ( plmeta('tmrv_image', $ioc) ) ? plmeta('tmrv_image', $ioc) : '';
+									$tmrv_image        = $this->find_and_show_image( $post->ID, 'tmrv_image', true);
+
 									// Styles
 									$tmrv_c_style      = ( plmeta('tmrv_c_style', $ioc) ) ? plmeta('tmrv_c_style', $ioc) : 'big_white';
 									$tmrv_video        = ( plmeta('tmrv_video', $ioc) ) ? plmeta('tmrv_video', $ioc) : '';
@@ -968,4 +974,14 @@ class TMSORevolution extends PageLinesSection
 			'easeInOutBounce'  => array('name' => __('InOutBounce', 'sophistique'))
 		);
 	}
+
+	function find_and_show_image($postID, $key ,$return_path = false){
+        $image = get_post_meta($postID, $key, true);
+        if( strstr($image, 'http') ){
+            $image_url = $image;
+        }else{
+            $image_url = wp_get_attachment_url( $image );
+        }
+        return ( !$return_path ) ? '<img src="'.$image_url.'" />' : $image_url;
+    }
 }
