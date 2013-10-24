@@ -4,6 +4,12 @@
 require_once( dirname(__FILE__) . '/setup.php' );
 
 // Load our shit in a class cause we're awesome
+add_filter('pl_activate_url', 'activation_url');
+function activation_url( $url ){
+    $url = home_url() . '?tablink=theme&tabsublink=flatten_config';
+    return $url;
+}
+
 class Flatten {
 
 	function __construct() {
@@ -55,11 +61,6 @@ class Flatten {
 	?>
 		</div> <!-- End Content Wrap. -->
 	<?php
-	}
-	function activation_url( $url ){
-
-	    $url = home_url() . '?tablink=theme&tabsublink=flatten_config';
-	    return $url;
 	}
 
 	// Custom LESS Vars
