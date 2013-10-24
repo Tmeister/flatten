@@ -1,6 +1,6 @@
 <?php
 /*
-	Section: iBoxFlat
+	Section: iBoxFlatFlat
 	Author: Enrique Chavez
 	Author URI: http://enriquechavez.co
 	Description: An easy way to create and configure several box type sections at once for Flatten.
@@ -21,16 +21,9 @@ class tmiBox extends PageLinesSection {
 		$options[] = array(
 
 			'title' => __( 'iBoxFlat Configuration', 'pagelines' ),
+			'key'	=> 'ibox_flat_config',
 			'type'	=> 'multi',
 			'opts'	=> array(
-				array(
-					'key'			=> 'ibox_flat_count',
-					'type' 			=> 'count_select',
-					'count_start'	=> 1,
-					'count_number'	=> 12,
-					'default'		=> 4,
-					'label' 	=> __( 'Number of iBoxes to Configure', 'pagelines' ),
-				),
 				array(
 					'key'			=> 'ibox_flat_cols',
 					'type' 			=> 'count_select',
@@ -47,7 +40,7 @@ class tmiBox extends PageLinesSection {
 						'text'		=> array( 'name' => __( 'Text Only, No Media', 'pagelines' ) )
 					),
 					'default'		=> 'icon',
-					'label' 	=> __( 'Select iBox Media Type', 'pagelines' ),
+					'label' 	=> __( 'Select iBoxFlat Media Type', 'pagelines' ),
 				),
 				array(
 					'key'			=> 'ibox_flat_format',
@@ -57,87 +50,73 @@ class tmiBox extends PageLinesSection {
 						'left'	 	=> array( 'name' => __( 'Media at Left', 'pagelines' ) ),
 					),
 					'default'		=> 'top',
-					'label' 	=> __( 'Select the iBox Media Location', 'pagelines' ),
+					'label' 	=> __( 'Select the iBoxFlat Media Location', 'pagelines' ),
 				),
 			)
 
 		);
 
-		$slides = ($this->opt('ibox_flat_count')) ? $this->opt('ibox_flat_count') : $this->default_limit;
-		$media = ($this->opt('ibox_flat_media')) ? $this->opt('ibox_flat_media') : 'icon';
-
-		for($i = 1; $i <= $slides; $i++){
-
-			$opts = array(
-
+		$options[] = array(
+			'key'		=> 'ibox_flat_array',
+	    	'type'		=> 'accordion',
+			'col'		=> 2,
+			'title'		=> __('iBoxFlates Setup', 'pagelines'),
+			'post_type'	=> __('iBoxFlat', 'pagelines'),
+			'opts'	=> array(
 				array(
-					'key'		=> 'ibox_flat_title_'.$i,
-					'label'		=> __( 'iBox Title', 'pagelines' ),
+					'key'		=> 'title',
+					'label'		=> __( 'iBoxFlat Title', 'pagelines' ),
 					'type'		=> 'text'
 				),
 				array(
-					'key'		=> 'ibox_flat_text_'.$i,
-					'label'	=> __( 'iBox Text', 'pagelines' ),
+					'key'		=> 'text',
+					'label'	=> __( 'iBoxFlat Text', 'pagelines' ),
 					'type'	=> 'textarea'
 				),
 				array(
-					'key'		=> 'ibox_flat_link_'.$i,
-					'label'		=> __( 'iBox Link (Optional)', 'pagelines' ),
+					'key'		=> 'link',
+					'label'		=> __( 'iBoxFlat Link (Optional)', 'pagelines' ),
 					'type'		=> 'text'
 				),
 				array(
-					'key'		=> 'ibox_flat_class_'.$i,
-					'label'		=> __( 'iBox Class (Optional)', 'pagelines' ),
+					'key'		=> 'class',
+					'label'		=> __( 'iBoxFlat Class (Optional)', 'pagelines' ),
 					'type'		=> 'text'
 				),
-			);
-
-			if($media == 'icon'){
-				$opts[] = array(
-					'key'		=> 'ibox_flat_icon_'.$i,
-					'label'		=> __( 'iBox Icon', 'pagelines' ),
-					'type'		=> 'select_icon',
-				);
-
-				$opts[] = array(
-					'key' => 'ibox_flat_color_'.$i,
-					'label' => __('iBox icon Color', 'pagelines'),
-					'type' => 'color',
-					'default' => '#00C9FF'
-				);
-
-			}
+				array(
+					'key'		=> 'icon',
+					'label'		=> __( 'iBoxFlat Icon', 'pagelines' ),
+					'type'		=> 'select_icon'
+				),
+				array(
+					'key'		=> 'color',
+					'label'		=> __('iBoxFlat icon Color', 'pagelines'),
+					'type'		=> 'color',
+					'default'  	=> '#00C9FF'
+				)
 
 
-			$options[] = array(
-				'title' 	=> __( 'iBox ', 'pagelines' ) . $i,
-				'type' 		=> 'multi',
-				'opts' 		=> $opts,
-
-			);
-
-		}
+			)
+	    );
 
 		return $options;
 	}
 
 	function section_head(){
-		$fboxes = $this->opt('ibox_flat_count');
+		$ibox_flat_array = $this->opt('ibox_flat_array');
+		$i = 1;
 	?>
 		<style>
-			<?php
-				for ($i=1; $i<=$fboxes; $i++):
-					$flatcolor = pl_hashify( $this->opt('ibox_flat_color_'.$i) );
-			?>
-				.ibox-<?php echo $this->meta['clone']?> .fibox-<?php echo $i;?> .ibox-flat-icon-border
-				{
-					border: 1px solid <?php echo $flatcolor ?>;
-				}
-				.ibox-<?php echo $this->meta['clone']?> .fibox-<?php echo $i;?> .ibox-flat-icon-border i,
-				.ibox-<?php echo $this->meta['clone']?> .fibox-<?php echo $i;?> h4{
-					color: <?php echo $flatcolor ?>;
-				}
-			<?php endfor ?>
+			<?php foreach ($ibox_flat_array as $box): $flatcolor = pl_hashify( $box['color'] ); ?>
+				#ibox-flat<?php echo $this->meta['clone']?> .fibox-<?php echo $i;?> .ibox-flat-icon-border
+                {
+                    border: 1px solid <?php echo $flatcolor ?>;
+                }
+                #ibox-flat<?php echo $this->meta['clone']?> .fibox-<?php echo $i;?> .ibox-flat-icon-border i,
+                #ibox-flat<?php echo $this->meta['clone']?> .fibox-<?php echo $i;?> h4{
+                    color: <?php echo $flatcolor ?>;
+                }
+			<?php $i++; endforeach; ?>
 		</style>
 	<?php
 	}
@@ -145,112 +124,247 @@ class tmiBox extends PageLinesSection {
 
    function section_template( ) {
 
-		$boxes = ($this->opt('ibox_flat_count')) ? $this->opt('ibox_flat_count') : $this->default_limit;
-		$cols = ($this->opt('ibox_flat_cols')) ? $this->opt('ibox_flat_cols') : 3;
+		// The boxes
+		$ibox_flat_array = $this->opt('ibox_flat_array');
 
+		$format_upgrade_mapping = array(
+			'text'	=> 'ibox_flat_text_%s',
+			'title'	=> 'ibox_flat_title_%s',
+			'link'	=> 'ibox_flat_link_%s',
+			'class'	=> 'ibox_flat_class_%s',
+			'image'	=> 'ibox_flat_image_%s',
+			'icon'	=> 'ibox_flat_icon_%s'
+		);
+
+		$ibox_flat_array = $this->upgrade_to_array_format( 'ibox_flat_array', $ibox_flat_array, $format_upgrade_mapping, $this->opt('ibox_flat_count'));
+
+		// must come after upgrade
+		if( !$ibox_flat_array || $ibox_flat_array == 'false' || !is_array($ibox_flat_array) ){
+			$ibox_flat_array = array( array(), array(), array() );
+		}
+
+		// Keep
+		$cols = ($this->opt('ibox_flat_cols')) ? $this->opt('ibox_flat_cols') : 4;
 		$media_type = ($this->opt('ibox_flat_media')) ? $this->opt('ibox_flat_media') : 'icon';
 		$media_format = ($this->opt('ibox_flat_format')) ? $this->opt('ibox_flat_format') : 'top';
 
 		$width = 0;
 		$output = '';
+		$count = 1;
 
-		for($i = 1; $i <= $boxes; $i++):
+		if( is_array($ibox_flat_array) ){
 
-			// TEXT
-			$text = ($this->opt('ibox_flat_text_'.$i)) ? $this->opt('ibox_flat_text_'.$i) : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id lectus sem. Cras consequat lorem.';
+			$boxes = count( $ibox_flat_array );
+
+			foreach( $ibox_flat_array as $ibox ){
+
+				$text = pl_array_get( 'text', $ibox, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id lectus sem. Cras consequat lorem.');
+				$title = pl_array_get( 'title', $ibox, 'iBoxFlat '. $count);
+				$link = pl_array_get( 'link', $ibox );
+				$user_class = pl_array_get( 'class', $ibox );
+				$image = pl_array_get( 'image', $ibox );
+				$icon = pl_array_get( 'icon', $ibox );
+
+
+				$text = sprintf('<div data-sync="ibox_flat_array_item%s_text">%s</div>', $count, $text );
+				$title = sprintf('<h4 data-sync="ibox_flat_array_item%s_title">%s</h4>', $count, $title );
+				$text_link = ($link) ? sprintf('<div class="ibox-link"><a href="%s">%s <i class="icon-angle-right"></i></a></div>', $link, __('More', 'pagelines')) : '';
+
+
+				$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
+				$media_class = 'media-type-'.$media_type;
+
+				$media_bg = '';
+				$media_html = '';
+
+				if( $media_type == 'icon' ){
+
+					if(!$icon || $icon == ''){
+						$icons = pl_icon_array();
+						$icon = $icons[ array_rand($icons) ];
+					}
+					$media_html = sprintf('<i class="flat-icon icon-3x icon-%s"></i>', $icon);
+
+				} elseif( $media_type == 'image' ){
+
+					$media_html = '';
+
+					$media_bg = ($image) ? sprintf('background-image: url(%s);', $image) : '';
+
+				}
+
+				$media_link = '';
+				$media_link_close = '';
+
+				if( $link ){
+					$media_link = sprintf('<a href="%s">',$link);
+					$media_link_close = '</a>';
+				}
+
+				if($width == 0)
+					$output .= '<div class="row fix">';
+
+
+				$output .= sprintf(
+					'<div class="span%s fibox-%d ibox %s %s fix">
+						<div class="ibox-flat-media img">
+							%s
+							<span class="ibox-flat-icon-border pl-animation pl-appear %s" style="%s">
+								%s
+							</span>
+							%s
+						</div>
+						<div class="ibox-flat-text bd">
+							%s
+							<div class="ibox-flat-desc">
+								%s
+								%s
+							</div>
+						</div>
+					</div>',
+					$cols,
+					$count,
+					$format_class,
+					$user_class,
+					$media_link,
+					$media_class,
+					$media_bg,
+					$media_html,
+					$media_link_close,
+					$title,
+					$text,
+					$text_link
+				);
+
+				$width += $cols;
+
+				if($width >= 12 || $count == $boxes){
+					$width = 0;
+					$output .= '</div>';
+				}
+
+
+				$count++;
+			}
+
+
+
+		}
+
+		printf('<div class="ibox-wrapper pl-animation-group">%s</div>', $output);
+
+		$scopes = array('local', 'type', 'global');
+	//	foreach($scopes as $scope)
+	//		$this->opt_update( 'ibox_flat_array', false, $scope );
+
+	}
+
+	function old_section_template( ) {
+
+			$boxes = ($this->opt('ibox_flat_count')) ? $this->opt('ibox_flat_count') : $this->default_limit;
+			$cols = ($this->opt('ibox_flat_cols')) ? $this->opt('ibox_flat_cols') : 3;
+
+			$media_type = ($this->opt('ibox_flat_media')) ? $this->opt('ibox_flat_media') : 'icon';
+			$media_format = ($this->opt('ibox_flat_format')) ? $this->opt('ibox_flat_format') : 'top';
+
+			$width = 0;
+			$output = '';
+
+			for($i = 1; $i <= $boxes; $i++):
+
+				// TEXT
+				$text = ($this->opt('ibox_flat_text_'.$i)) ? $this->opt('ibox_flat_text_'.$i) : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id lectus sem. Cras consequat lorem.';
 
 			$text = sprintf('<div data-sync="ibox_flat_text_%s">%s</div>', $i, $text );
 			$user_class = ($this->opt('ibox_flat_class_'.$i)) ? $this->opt('ibox_flat_class_'.$i) : '';
 
-			$title = ($this->opt('ibox_flat_title_'.$i)) ? $this->opt('ibox_flat_title_'.$i) : __('iBoxFlat '.$i, 'pagelines');
-			$title = sprintf('<h4 data-sync="ibox_flat_title_%s">%s</h4>', $i, $title );
+				$title = ($this->opt('ibox_flat_title_'.$i)) ? $this->opt('ibox_flat_title_'.$i) : __('iBoxFlat '.$i, 'pagelines');
+				$title = sprintf('<h4 data-sync="ibox_flat_title_%s">%s</h4>', $i, $title );
 
-			// LINK
-			$link = $this->opt('ibox_flat_link_'.$i);
-			$text_link = ($link) ? sprintf('<div class="ibox-flat-link"><a href="%s">%s <i class="icon-angle-right"></i></a></div>', $link, __('More', 'pagelines')) : '';
+				// LINK
+				$link = $this->opt('ibox_flat_link_'.$i);
+				$text_link = ($link) ? sprintf('<div class="ibox-link"><a href="%s">%s <i class="icon-angle-right"></i></a></div>', $link, __('More', 'pagelines')) : '';
 
 
-			$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
-			$media_class = 'media-type-'.$media_type;
+				$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
+				$media_class = 'media-type-'.$media_type;
 
-			$media_bg = '';
-			$media_html = '';
-
-			if( $media_type == 'icon' ){
-				$media = ($this->opt('ibox_flat_icon_'.$i)) ? $this->opt('ibox_flat_icon_'.$i) : false;
-				if(!$media){
-					$icons = pl_icon_array();
-					$media = $icons[ array_rand($icons) ];
-				}
-				$media_html = sprintf('<i class="flat-icon icon-%s"></i>', $media);
-
-			} elseif( $media_type == 'image' ){
-
-				$media = ($this->opt('ibox_flat_image_'.$i)) ? $this->opt('ibox_flat_image_'.$i) : false;
-
+				$media_bg = '';
 				$media_html = '';
 
-				$media_bg = ($media) ? sprintf('background-image: url(%s);', $media) : '';
+				if( $media_type == 'icon' ){
+					$media = ($this->opt('ibox_flat_icon_'.$i)) ? $this->opt('ibox_flat_icon_'.$i) : false;
+					if(!$media){
+						$icons = pl_icon_array();
+						$media = $icons[ array_rand($icons) ];
+					}
+					$media_html = sprintf('<i class="icon-3x icon-%s"></i>', $media);
 
-			}
+				} elseif( $media_type == 'image' ){
 
-			$media_link = '';
-			$media_link_close = '';
+					$media = ($this->opt('ibox_flat_image_'.$i)) ? $this->opt('ibox_flat_image_'.$i) : false;
 
-			if( $link ){
-				$media_link = sprintf('<a href="%s">',$link);
-				$media_link_close = '</a>';
-			}
+					$media_html = '';
 
-			if($width == 0)
-				$output .= '<div class="row fix">';
+					$media_bg = ($media) ? sprintf('background-image: url(%s);', $media) : '';
+
+				}
+
+				$media_link = '';
+				$media_link_close = '';
+
+				if( $link ){
+					$media_link = sprintf('<a href="%s">',$link);
+					$media_link_close = '</a>';
+				}
+
+				if($width == 0)
+					$output .= '<div class="row fix">';
 
 
-			$output .= sprintf(
-				'<div class="span%s ibox fibox-%d %s %s fix">
-					<div class="ibox-flat-media img">
-						%s
-						<span class="ibox-flat-icon-border %s" style="%s">
+				$output .= sprintf(
+					'<div class="span%s ibox %s %s fix">
+						<div class="ibox-media img">
 							%s
-						</span>
-						%s
-					</div>
-					<div class="ibox-flat-text bd">
-						%s
-						<div class="ibox-flat-desc">
-							%s
+							<span class="ibox-icon-border pl-animation pl-appear pl-contrast %s" style="%s">
+								%s
+							</span>
 							%s
 						</div>
-					</div>
-				</div>',
-				$cols,
-				$i,
-				$format_class,
-				$user_class,
-				$media_link,
-				$media_class,
-				$media_bg,
-				$media_html,
-				$media_link_close,
-				$title,
-				$text,
-				$text_link
-			);
+						<div class="ibox-text bd">
+							%s
+							<div class="ibox-desc">
+								%s
+								%s
+							</div>
+						</div>
+					</div>',
+					$cols,
+					$format_class,
+					$user_class,
+					$media_link,
+					$media_class,
+					$media_bg,
+					$media_html,
+					$media_link_close,
+					$title,
+					$text,
+					$text_link
+				);
 
-			$width += $cols;
+				$width += $cols;
 
-			if($width >= 12 || $i == $boxes){
-				$width = 0;
-				$output .= '</div>';
-			}
+				if($width >= 12 || $i == $boxes){
+					$width = 0;
+					$output .= '</div>';
+				}
 
 
-		 endfor;
+			 endfor;
 
-		$clone =  'ibox-'.$this->meta['clone'];
-		printf('<div class="ibox-flat-wrapper pl-animation-group %s %s">%s</div>', 'flat-media-'.$media_type, $clone, $output);
+			printf('<div class="ibox-wrapper pl-animation-group">%s</div>', $output);
 
-	}
+		}
 
 
 }

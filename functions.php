@@ -176,28 +176,30 @@ class Flatten {
 		    'icon'  => 'icon-pagelines',
 		    'opts'  => array(
 		        array(
-		        	'key' => 'welcome',
-		        	'type' => 'template',
-		        	'template' => $hi,
-		        	'title' => 'Hi, Welcome to Flatten'
+					'key'      => 'welcome',
+					'type'     => 'template',
+					'template' => $hi,
+					'title'    => 'Hi, Welcome to Flatten'
 		        ),
 		        array(
-		        	'key' => 'step1',
-		        	'type' => 'template',
-		        	'template' => $step1,
-		        	'title' => 'Step 1 - Child Theme configuration'
+					'key'      => 'step1',
+					'type'     => 'template',
+					'template' => $step1,
+					'title'    => 'Step 1 - Child Theme configuration'
 		        ),
 		        array(
-		        	'key' => 'step2',
-		        	'type' => 'template',
-		        	'template' => $step2,
-		        	'title' => 'Step 2 - Demo content'
+					'key'      => 'step2',
+					'type'     => 'template',
+					'template' => $step2,
+					'title'    => 'Step 2 - Demo content',
+					'col'      => 2,
 		        ),
 		        array(
-		        	'key' => 'step3',
-		        	'type' => 'template',
-		        	'template' => $step3,
-		        	'title' => 'Step 3 - Home and Blog Pages'
+					'key'      => 'step3',
+					'type'     => 'template',
+					'template' => $step3,
+					'title'    => 'Step 3 - Home and Blog Pages',
+					'col'      => 3
 		        )
 
 

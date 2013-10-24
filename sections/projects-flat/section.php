@@ -11,9 +11,11 @@
 */
 
 
-/**
-*
-*/
+if( ! function_exists('cmb_init') ){
+    require_once( 'cmb/custom-meta-boxes.php' );
+}
+
+
 class TMPortfolioFlat extends PageLinesSection{
 
     var $tax_id           = 'project_flat_sets';
@@ -23,8 +25,9 @@ class TMPortfolioFlat extends PageLinesSection{
         add_action('wp_ajax_load_project', array($this, 'get_project'));
         add_action('wp_ajax_nopriv_load_project', array($this, 'get_project'));
         add_image_size( 'project-thum', 420 , 300, true );
+
         $this->post_type_setup();
-        $this->post_meta_setup();
+        add_filter( 'cmb_meta_boxes', array(&$this, 'meta_boxes') );
     }
 
     function section_styles(){
@@ -58,13 +61,11 @@ class TMPortfolioFlat extends PageLinesSection{
             return;
         }
 
-        $showlabel = ( $this->opt($this->id.'_show') ) ? $this->opt($this->id.'_show') : 'Showing';
-        $alllabel = ( $this->opt($this->id.'_all') ) ? $this->opt($this->id.'_all') : 'All';
+        $showlabel   = ( $this->opt($this->id.'_show') ) ? $this->opt($this->id.'_show') : 'Showing';
+        $alllabel    = ( $this->opt($this->id.'_all') ) ? $this->opt($this->id.'_all') : 'All';
         $buttonlabel = ( $this->opt($this->id.'_button') ) ? $this->opt($this->id.'_button') : 'Launch Project';
         $buttonclass = ( $this->opt($this->id.'_btnClass') ) ? $this->opt($this->id.'_btnClass') : 'btn-primary';
 
-
-        //
     ?>
 
         <div class="project-flat-wrapper">
@@ -247,49 +248,28 @@ class TMPortfolioFlat extends PageLinesSection{
         }
     }
 
-    function post_meta_setup(){
-        $options = array(
-            $this->id.'_url' => array(
-                'type'       => 'text',
-                'title'      => __('Project URL','flatten'),
-                'shortexp'   => __( 'External Project URL', 'flatten' ),
-                'inputlabel' => __( 'External URL', 'flatten' ),
-                'exp'        => __( 'If the project is public add the URL.</br></br>Please use full path http://', 'flatten')
-
-            ),
-            $this->id.'_tags' => array(
-                'type'       => 'text',
-                'title'      => __('Project tags','flatten'),
-                'shortexp'   => __( 'Comma separated', 'flatten' ),
-                'inputlabel' => __( 'Tags', 'flatten' ),
-                'exp'        => __( 'Please add tags for the project, for multiple tags please use a comma separate', 'flatten')
+    function meta_boxes( $meta_boxes ){
+        $meta_boxes[] = array(
+            'title' => __('Project Details','flatten'),
+            'pages' => $this->custom_post_type,
+            'fields' => array(
+                array(
+                    'id'   => $this->id.'_url',
+                    'name' => __('Project URL','flatten'),
+                    'type' => 'text_url',
+                    'desc' => __( 'If the project is public add the URL.<br/>Please use full path http://', 'flatten'),
+                    'cols' => 6
+                ),
+                array(
+                    'id'   => $this->id.'_tags',
+                    'name' =>  __('Project tags','flatten'),
+                    'type' => 'text',
+                    'desc' => __( 'Please add tags for the project, for multiple tags please use a comma separate', 'flatten'),
+                    'cols' => 6
+                ),
             )
-
         );
-
-
-        /*
-        * Setup
-        */
-
-        $pt_panel = array(
-                'id'        => 'project-flatten',
-                'name'      => __('Project Details','flatten'),
-                'posttype'  => array( $this->custom_post_type ),
-                'hide_tabs' => false
-            );
-
-        $pt_panel =  new PageLinesMetaPanel( $pt_panel );
-
-
-        $pt_tab = array(
-            'id'        => 'tm_projects_metatab',
-            'name'      => __("Please fill the fields below", 'flatten') ,
-            'icon'      => $this->icon,
-        );
-
-        $pt_panel->register_tab( $pt_tab, $options );
-
+        return $meta_boxes;
     }
 
     function get_posts( $custom_post, $tax_id, $set = null, $limit = null){
