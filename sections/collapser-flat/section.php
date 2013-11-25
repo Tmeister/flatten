@@ -11,6 +11,12 @@ Demo: http://pagelines.tmeister.net/collapser/
 PageLines: true
 */
 
+
+if( ! function_exists('cmb_init') ){
+    require_once( 'cmb/custom-meta-boxes.php' );
+}
+
+
 class CollapserFlatTm extends PageLinesSection
 {
 
@@ -26,8 +32,7 @@ class CollapserFlatTm extends PageLinesSection
     function section_persistent()
     {
         $this->post_type_setup();
-        $this->post_meta_setup();
-        $this->section_key = strtolower( str_replace(' ', '_', $this->section_name) );
+        add_filter( 'cmb_meta_boxes', array(&$this, 'meta_boxes') );
     }
 
     function dmshify(){
@@ -69,14 +74,12 @@ class CollapserFlatTm extends PageLinesSection
         /**********************************************************************
         ** Styles
         **********************************************************************/
-        $title_back             = $this->opt('tm_collapser_section_title_bg',$oset) ? pl_hashify( $this->opt('tm_collapser_section_title_bg',$oset)) : '#fff';
-        $title_color            = $this->opt('tm_collapser_title_color',$oset) ? pl_hashify($this->opt('tm_collapser_title_color',$oset)) : pl_hashify( pl_link_color() );
         $item_back              = $this->opt('tm_collapser_item_background',$oset) ? pl_hashify($this->opt('tm_collapser_item_background',$oset)) : '#fff';
-        $item_back_hover        = $this->opt('tm_collapser_item_background_over',$oset) ? pl_hashify($this->opt('tm_collapser_item_background_over',$oset)) : pl_hashify( pl_link_color() );
-        $item_title_color       = $this->opt('tm_collapser_title_item_color',$oset) ? pl_hashify($this->opt('tm_collapser_title_item_color',$oset)) : pl_hashify( pl_text_color() );
-        $item_title_color_hover = $this->opt('tm_collapser_title_over_color',$oset) ? pl_hashify($this->opt('tm_collapser_title_over_color',$oset)) : pl_hashify( pl_text_color() );
+        $item_back_hover        = $this->opt('tm_collapser_item_background_over',$oset) ? pl_hashify($this->opt('tm_collapser_item_background_over',$oset)) : '21759B';
+        $item_title_color       = $this->opt('tm_collapser_title_item_color',$oset) ? pl_hashify($this->opt('tm_collapser_title_item_color',$oset)) : '#000';
+        $item_title_color_hover = $this->opt('tm_collapser_title_over_color',$oset) ? pl_hashify($this->opt('tm_collapser_title_over_color',$oset)) : '#000';
         $border                 = $this->opt('tm_collapser_menu_border',$oset) ? pl_hashify($this->opt('tm_collapser_menu_border',$oset)) : '#ffffff';
-        $content_color          = $this->opt('tm_collapser_text_color',$oset) ? pl_hashify($this->opt('tm_collapser_text_color',$oset)) : pl_hashify( pl_text_color() );
+        $content_color          = $this->opt('tm_collapser_text_color',$oset) ? pl_hashify($this->opt('tm_collapser_text_color',$oset)) : '#000';
 
 
     ?>
@@ -161,13 +164,13 @@ class CollapserFlatTm extends PageLinesSection
         $show_first        = ! $this->opt( 'tm_collapser_hide_first_tab',$oset );
 
         if( !count($this->posts  ) ){
-            echo setup_section_notify($this, __('Sorry,there are no post to display.', $this->domain), get_admin_url().'edit.php?post_type='.$this->custom_post_type, __('Please create some posts', $this->domain));
+            echo setup_section_notify($this, __('Sorry,there are no post to display.', 'flatten'), get_admin_url().'edit.php?post_type='.$this->custom_post_type, __('Please create some posts', 'flatten'));
             return;
         }
 
         $current = $this->posts[0];
         $inner_oset = array('post_id' => $current->ID);
-        $image = plmeta('tm_collapser_image', $inner_oset);
+        $image = $this->find_and_show_image($current->ID, true);
     ?>
         <div class="collapser-block<?php echo $clone_id?>">
             <h3 class="block-title zmb">
@@ -217,7 +220,7 @@ class CollapserFlatTm extends PageLinesSection
         {
             setup_postdata( $post );
             $inner_oset = array('post_id' => $post->ID);
-            $image = plmeta('tm_collapser_image', $inner_oset);
+            $image = $this->find_and_show_image($post->ID, true);
             $link = plmeta('tm_collapser_url', $inner_oset);
             $readmore = plmeta('tm_collapser_read_more_text', $inner_oset);
             $morelink = ( strlen($link) ) ? '<p><a href="'.$link.'">'.$readmore.'</a></p>' : ' ';
@@ -247,65 +250,44 @@ class CollapserFlatTm extends PageLinesSection
         return $out;
     }
 
-    function post_meta_setup(){
-        $pt_tab_options = array(
-            'tm_collapser_image' => array(
-                'title'        => __( 'Collapser Post Image', $this->domain),
-                'shortexp'     => __( 'Featured image for the Collapser post', $this->domain),
-                'inputlabel'   => __( 'Select a Image', $this->domain),
-                'type'         => 'image_upload',
-                'exp'          => __('This image will be displayed beside the list, the suggested size is up to 520px width & 400px height.', $this->domain),
-            ),
-            'tm_collapser_url' => array(
-                'title'        => __( 'Target URL (Optional)', $this->domain),
-                'shortexp'     => __( 'You can set a URL for "Read more".', $this->domain),
-                'inputlabel'   => __( 'URL', $this->domain),
-                'type'         => 'text',
-                'exp'          => __('', $this->domain),
-            ),
-            'tm_collapser_read_more_text' => array(
-                'title'        => __( 'Link title (Optional)', $this->domain),
-                'shortexp'     => __( 'Set the Link title', $this->domain),
-                'inputlabel'   => __( 'Link title', $this->domain),
-                'type'         => 'text',
-                'exp'          => __('Please type the link title for default the text to show is "Read more" this link will show after the content.', $this->domain),
-            ),
-
+    function meta_boxes( $meta_boxes ){
+        $meta_boxes[] = array(
+            'title' => 'Collapser Extra Data',
+            'pages' => $this->custom_post_type,
+            'fields' => array(
+                array(
+                    'id'   => 'tm_collapser_image',
+                    'name' => __( 'Collapser Post Image', 'sophistique'),
+                    'type' => 'image'
+                ),
+                array(
+                    'id'   => 'tm_collapser_url',
+                    'name' => __( 'Target URL (Optional)', 'sophistique'),
+                    'type' => 'text_url'
+                ),
+                array(
+                    'id'   => 'tm_collapser_read_more_text',
+                    'name' => __( 'Link title (Optional)', 'sophistique'),
+                    'type' => 'text'
+                )
+            )
         );
-
-        $pt_panel = array(
-                'id'        => 'tm_collapser',
-                'name'      => __('Collapser Post  Details',$this->domain),
-                'posttype'  => array( $this->custom_post_type ),
-                'hide_tabs' => false
-            );
-
-        $pt_panel =  new PageLinesMetaPanel( $pt_panel );
-
-
-        $pt_tab = array(
-            'id'        => 'tm_collapser_metatab',
-            'name'      => __("Please fill the below fields", $this->domain) ,
-            'icon'      => $this->icon,
-        );
-
-        $pt_panel->register_tab( $pt_tab, $pt_tab_options );
+        return $meta_boxes;
     }
-
 
     function post_type_setup(){
         $args = array(
-            'label'          => __('Collapser Posts', $this->domain),
-            'singular_label' => __('Post', $this->domain),
-            'description'    => __('', $this->domain),
+            'label'          => __('Collapser Posts', 'flatten'),
+            'singular_label' => __('Post', 'flatten'),
+            'description'    => __('', 'flatten'),
             'taxonomies'     => array( $this->tax_id ),
             'menu_icon'      => $this->icon,
             'supports'       => array( 'title', 'editor')
         );
         $taxonomies = array(
             $this->tax_id => array(
-                'label'          => __('Collapser Sets', $this->domain),
-                'singular_label' => __('Collapser Set', $this->domain),
+                'label'          => __('Collapser Sets', 'flatten'),
+                'singular_label' => __('Collapser Set', 'flatten'),
             )
         );
         $columns = array(
@@ -324,119 +306,116 @@ class CollapserFlatTm extends PageLinesSection
                 echo get_the_term_list($post->ID, $this->tax_id, '', ', ','');
                 break;
             case 'collapser_media':
-                echo '<img src="'.m_pagelines('tm_collapser_image', $post->ID).'" style="max-width: 300px; max-height: 100px" />';
+                echo $this->find_and_show_image($post->ID);
                 break;
         }
     }
 
-    function section_optionator( $settings )
+    function find_and_show_image($postID, $return_path = false){
+        $image = get_post_meta($postID, 'tm_collapser_image', true);
+        if( strstr($image, 'http') ){
+            $image_url = $image;
+        }else{
+            $image_url = wp_get_attachment_url( $image );
+        }
+        return ( !$return_path ) ? '<img src="'.$image_url.'" style="max-width: 300px; max-height: 100px" />' : $image_url;
+    }
+
+    function section_opts()
     {
-        $settings = wp_parse_args($settings, $this->optionator_default);
+        //$settings = wp_parse_args($settings, $this->optionator_default);
         $opt_array = array(
             'tm_collapser_title'    => array(
                 'type'          => 'text',
-                'inputlabel'    => __('Title', $this->domain),
-                'title'         => __('Section Title', $this->domain),
-                'shortexp'      => __('Default: "Latest from the Blog"', $this->domain),
-                'exp'           => __('If set the title will show on the top of the section', $this->domain),
+                'inputlabel'    => __('Title', 'flatten'),
+                'title'         => __('Section Title', 'flatten'),
+                'shortexp'      => __('Default: "Latest from the Blog"', 'flatten'),
+                'exp'           => __('If set the title will show on the top of the section', 'flatten'),
             ),
             'tm_collapser_set'  => array(
                 'type'          => 'select_taxonomy',
                 'taxonomy_id'   => $this->tax_id,
-                'title'         => __('Select the set to show', $this->domain),
-                'shortexp'      => __('The set to show', $this->domain),
-                'inputlabel'    => __('Select a set', $this->domain),
-                'exp'           => __('Select the set you would like to show on this page. if don\'t select a set the slider will show the last entries under collapser posts', $this->domain)
+                'title'         => __('Select the set to show', 'flatten'),
+                'shortexp'      => __('The set to show', 'flatten'),
+                'inputlabel'    => __('Select a set', 'flatten'),
+                'exp'           => __('Select the set you would like to show on this page. if don\'t select a set the slider will show the last entries under collapser posts', 'flatten')
             ),
             'tm_collapser_items' => array(
                 'type'         => 'count_select',
-                'inputlabel'   => __('Number of post to show', $this->domain),
-                'title'        => __('Number of post', $this->domain),
-                'shortexp'     => __('Default value is 5', $this->domain),
-                'exp'          => __('The amount of post to show.', $this->domain),
+                'inputlabel'   => __('Number of post to show', 'flatten'),
+                'title'        => __('Number of post', 'flatten'),
+                'shortexp'     => __('Default value is 5', 'flatten'),
+                'exp'          => __('The amount of post to show.', 'flatten'),
                 'count_start'  => 1,
                 'count_number' => 100,
                 'default'      => 5
             ),
             'tm_collapser_hide_first_tab' => array(
                 'type' => 'check',
-                'inputlabel' => __('Start with the first tab closed', $this->domain),
-                'title' => __('First tab closed'),
-                'shortexp' => _('Check if you don\'t want that the first tab shows open')
+                'inputlabel' => __('Start with the first tab closed', 'flatten'),
+                'title' => __('First tab closed', 'flatten'),
+                'shortexp' => _('Check if you don\'t want that the first tab shows open'),
+                'col' => 2
             ),
             'tm_collapser_position' => array(
                 'title'         => 'Thumbnail position',
                 'type'          => 'select',
-                'selectvalues'  => array(
-                    'left'  => array('name' => __( 'Left', $this->domain) ),
-                    'right' => array('name' => __( 'Right', $this->domain) ),
-                    'none'  => array('name' => __( 'Do not use thumbnails'), $this->domain)
+                'opts'  => array(
+                    'left'  => array('name' => __( 'Left', 'flatten') ),
+                    'right' => array('name' => __( 'Right', 'flatten') ),
+                    'none'  => array('name' => __( 'Do not use thumbnails', 'flatten'))
                 ),
-                'inputlabel'    => __( 'Position', $this->domain ),
+                'inputlabel'    => __( 'Position', 'flatten' ),
                 'shortexp'      => 'Default value: Left',
-                'exp'           => 'Indicates where the thumbnail images will be displayed. If you want to use a full  width tabs use the "Do not use thumbnails" option'
+                'exp'           => 'Indicates where the thumbnail images will be displayed. If you want to use a full  width tabs use the "Do not use thumbnails" option',
+                'col' => 2
             ),
 
-            'tm_collapser_section_title_bg' => array(
-                'type' => 'colorpicker',
-                'inputlabel' => __( 'Title Background', $this->domain ),
-                'title' => __( 'Title Background', $this->domain ),
-                'default' => '#FFFFFF'
-            ),
-
-            'tm_collapser_title_color'  => array(
-                'inputlabel'    => __( 'Section Title Text', $this->domain ),
-                'type' => 'colorpicker',
-                'title' => __( 'Section Title Text', $this->domain ),
-                'default' => pl_hashify( pl_link_color() )
-            ),
             'tm_collapser_item_background'  => array(
-                'inputlabel'    => __( 'Item highlight', $this->domain ),
-                'type' => 'colorpicker',
-                'title' => __( 'Item highlight', $this->domain ),
-                'default' => '#FFFFFF'
+                'inputlabel'    => __( 'Item highlight', 'flatten' ),
+                'type' => 'color',
+                'title' => __( 'Item highlight', 'flatten' ),
+                'default' => '#FFFFFF',
+                'col' => 2
             ),
             'tm_collapser_item_background_over' => array(
-                'inputlabel'    => __( 'Item highlight hover', $this->domain ),
-                'type' => 'colorpicker',
-                'title' => __( 'Item highlight hover', $this->domain ),
-                'default' => pl_hashify( pl_link_color() )
+                'inputlabel'    => __( 'Item highlight hover', 'flatten' ),
+                'type' => 'color',
+                'title' => __( 'Item highlight hover', 'flatten' ),
+                'default' => '#66BCD9',
+                'col' => 2
             ),
             'tm_collapser_title_item_color' => array(
-                'inputlabel'    => __( 'Item Title Text', $this->domain ),
-                'type' => 'colorpicker',
-                'title' => __( 'Item Title Text', $this->domain ),
-                'default' => pl_hashify( pl_text_color() )
+                'inputlabel'    => __( 'Item Title Text', 'flatten' ),
+                'type' => 'color',
+                'title' => __( 'Item Title Text', 'flatten' ),
+                'default' => '#000000',
+                'col' => 3
             ),
             'tm_collapser_title_over_color' => array(
-                'inputlabel'    => __( 'Item Title Text Hover', $this->domain ),
-                'type' => 'colorpicker',
-                'title' => __( 'Item Title Text Hover', $this->domain ),
-                'default' => pl_hashify( pl_text_color() )
+                'inputlabel'    => __( 'Item Title Text Hover', 'flatten' ),
+                'type' => 'color',
+                'title' => __( 'Item Title Text Hover', 'flatten' ),
+                'default' => '#000000',
+                'col' => 3
             ),
             'tm_collapser_menu_border'  => array(
-                'inputlabel'    => __( 'Item Border', $this->domain ),
-                'type' => 'colorpicker',
-                'title' => __( 'Item Border', $this->domain ),
-                'default' => '#ffffff'
+                'inputlabel'    => __( 'Item Border', 'flatten' ),
+                'type' => 'color',
+                'title' => __( 'Item Border', 'flatten' ),
+                'default' => '#ffffff',
+                'col' => 3
             ),
             'tm_collapser_text_color'   => array(
-                'inputlabel'    => __( 'Content Text', $this->domain ),
-                'type' => 'colorpicker',
-                'title' => __( 'Content Text', $this->domain ),
-                'default' => pl_hashify( pl_text_color() )
+                'inputlabel'    => __( 'Content Text', 'flatten' ),
+                'type' => 'color',
+                'title' => __( 'Content Text', 'flatten' ),
+                'default' => '#000000',
+                'col' => 3
             )
         );
 
-        $settings = array(
-            'id'        => $this->id.'_meta',
-            'name'      => $this->name,
-            'icon'      => $this->icon,
-            'clone_id'  => $settings['clone_id'],
-            'active'    => $settings['active']
-        );
-
-        register_metatab($settings, $opt_array);
+        return $opt_array;
     }
 
     function get_posts( $custom_post, $tax_id, $set = null, $limit = null){
