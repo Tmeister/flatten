@@ -94,7 +94,7 @@ class tmHeroFlat extends PageLinesSection {
 
 			array(
 				'label'			=> __( 'Text Area Width', 'pagelines' ),
-				'key'			=> 'flat_left_width',
+				'key'			=> 'flat_herounit_left_width',
 				'default'		=> 'span6',
 				'type'			=> 'select',
 				'opts'			=> array(
