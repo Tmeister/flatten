@@ -12,6 +12,11 @@ function activation_url( $url ){
 
 class Flatten {
 
+	var $theme_name      = 'Flatten';
+    var $theme_version   = '1.0';
+    var $theme_key;
+    var $chavezShop;
+
 	function __construct() {
 
 		// Constants
@@ -25,7 +30,8 @@ class Flatten {
 		add_action( 'pagelines_loop_after_post_content', 	array( &$this, 'add_post_content'));
 
 		add_filter( 'widget_title', array(&$this, 'add_hr') );
-
+		add_filter( 'pl_sorted_settings_array',     array( &$this, 'add_global_panel'));
+		add_filter( 'admin_init',                   array( &$this, 'autoupdate') );
 		$this->init();
 	}
 
@@ -37,6 +43,43 @@ class Flatten {
 		// Send the user to the Theme Config panel after they activate.
 		add_filter('pl_activate_url', array(&$this,'activation_url'));
 	}
+
+	function autoupdate(){
+		if ( !class_exists( 'chavezShopThemeVerifier' ) ) {
+			include( dirname( __FILE__ ) . '/inc/chavezShopThemeVerifier.php' );
+		}
+
+		$this->chavezShop = new chavezShopThemeVerifier( $this->theme_name, $this->theme_version, pl_setting( 'flatten_license_key' ) );
+		$this->chavezShop->check_for_updates();
+	}
+
+	function add_global_panel($settings){
+        $valid = "";
+        if( get_option( $this->theme_key."_activated" ) ){
+            $valid = ( $this->chavezShop->check_license() ) ? ' - Your license is valid' : ' - Your license is invalid';
+        }
+
+        if( !isset( $settings['eChavez'] ) ){
+            $settings['eChavez'] = array(
+                'name' => 'Enrique Chavez Shop',
+                'icon' => 'icon-shopping-cart',
+                'opts' => array()
+            );
+        }
+
+        $collapser_opts = array(
+            'key'   => 'flatten_license_key',
+            'type'  => 'text',
+            'title' => '<i class="icon-shopping-cart"></i> ' . __('Flatten License Key', 'flatten') . $valid,
+            'label' => __('License Key', 'flatten'),
+            'help'  => __('The theme is fully functional whitout a key license, this license is used only get access to autoupdates within your admin.', 'flatten')
+
+        );
+
+        array_push($settings['eChavez']['opts'], $collapser_opts);
+        return $settings;
+
+    }
 
 	function add_hr($title){
 		return $title;
