@@ -13,7 +13,7 @@ function activation_url( $url ){
 class Flatten {
 
 	var $theme_name      = 'Flatten';
-    var $theme_version   = '1.0';
+    var $theme_version   = '1.1';
     var $theme_key;
     var $chavezShop;
 
@@ -30,8 +30,8 @@ class Flatten {
 		add_action( 'pagelines_loop_after_post_content', 	array( &$this, 'add_post_content'));
 
 		add_filter( 'widget_title', array(&$this, 'add_hr') );
-		add_filter( 'pl_sorted_settings_array',     array( &$this, 'add_global_panel'));
-		add_filter( 'admin_init',                   array( &$this, 'autoupdate') );
+		//add_filter( 'pl_sorted_settings_array',     array( &$this, 'add_global_panel'));
+		//add_filter( 'admin_init',                   array( &$this, 'autoupdate') );
 		$this->init();
 	}
 

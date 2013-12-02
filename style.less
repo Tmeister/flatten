@@ -531,6 +531,9 @@ h1,h2,h3,h4,h5,h6{
 */
 body{
     &.display-boxed{
+
+        background: @bodyBackground;
+
         .section-flat-nav{
             width: @pl-page-width;
             top:30px;
@@ -552,6 +555,9 @@ body{
                     min-height: 150px;
                 }
             }
+        }
+        .site-wrap{
+            background: none transparent !important;
         }
     }
 
