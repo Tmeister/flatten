@@ -60,7 +60,7 @@ class CollapserFlatTm extends PageLinesSection
         $oset        = array('post_id' => $pagelines_ID, 'clone_id' => $clone_id);
         $limit       = ( $this->opt('tm_collapser_items', $oset) ) ? $this->opt('tm_collapser_items', $oset) : '5';
         $set         = ( $this->opt('tm_collapser_set', $oset) ) ? $this->opt('tm_collapser_set', $oset) : null;
-        $this->posts = $this->get_posts($this->custom_post_type, $this->tax_id, $set, $limit);
+        $this->posts = $this->custom_get_posts($this->custom_post_type, $this->tax_id, $set, $limit);
 
 
         if( !count( $this->posts ) ){
@@ -160,7 +160,7 @@ class CollapserFlatTm extends PageLinesSection
         $title             = ( $this->opt('tm_collapser_title', $oset) ) ? $this->opt('tm_collapser_title', $oset) : 'Collapser Section';
         $position          = ( $this->opt('tm_collapser_position', $oset) ) ? $this->opt('tm_collapser_position', $oset) : 'left';
         $read_more_text    = ( $this->opt('tm_collapser_read_more_text', $oset ) ) ? $this->opt('tm_collapser_read_more_text', $oset )  : 'Read More';
-        $this->posts       = $this->get_posts($this->custom_post_type, $this->tax_id, $set, $limit);
+        $this->posts       = $this->custom_get_posts($this->custom_post_type, $this->tax_id, $set, $limit);
         $show_first        = ! $this->opt( 'tm_collapser_hide_first_tab',$oset );
 
         if( !count($this->posts  ) ){
@@ -281,7 +281,6 @@ class CollapserFlatTm extends PageLinesSection
             'singular_label' => __('Post', 'flatten'),
             'description'    => __('', 'flatten'),
             'taxonomies'     => array( $this->tax_id ),
-            'menu_icon'      => $this->icon,
             'supports'       => array( 'title', 'editor')
         );
         $taxonomies = array(
@@ -418,7 +417,7 @@ class CollapserFlatTm extends PageLinesSection
         return $opt_array;
     }
 
-    function get_posts( $custom_post, $tax_id, $set = null, $limit = null){
+    function custom_get_posts( $custom_post, $tax_id, $set = null, $limit = null){
         $query              = array();
         $query['orderby']   = 'ID';
         $query['post_type'] = $custom_post;

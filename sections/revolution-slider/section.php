@@ -59,7 +59,7 @@ class TMSORevolution extends PageLinesSection
 		$tmrv_items      = ( $this->opt('tmrv_items', $oset) ) ? $this->opt('tmrv_items', $oset) : '10';
 		$tmrv_set        = ( $this->opt('tmrv_set', $oset) ) ? $this->opt('tmrv_set', $oset) : '';
 		$tmrv_time       = ( $this->opt('tmrv_time', $oset) ) ? $this->opt('tmrv_time', $oset) : '8000';
-		$this->slides    = $this->get_posts($this->custom_post_type, $this->tax_id, $tmrv_set, $tmrv_items);
+		$this->slides    = $this->custom_get_posts($this->custom_post_type, $this->tax_id, $tmrv_set, $tmrv_items);
 
 		if( !count( $this->slides ) ){
 			return;
@@ -98,7 +98,7 @@ class TMSORevolution extends PageLinesSection
 		$tmrv_items   = ( $this->opt('tmrv_items', $oset) ) ? $this->opt('tmrv_items', $oset) : '10';
 		$tmrv_set     = ( $this->opt('tmrv_set', $oset) ) ? $this->opt('tmrv_set', $oset) : '';
 
-		$slides = ( $this->slides == null ) ? $this->get_posts($this->custom_post_type, $this->tax_id, $tmrv_set, $tmrv_items) : $this->slides;
+		$slides = ( $this->slides == null ) ? $this->custom_get_posts($this->custom_post_type, $this->tax_id, $tmrv_set, $tmrv_items) : $this->slides;
 		$current_page_post = $post;
 
 		if( !count($slides) ){
@@ -130,7 +130,7 @@ class TMSORevolution extends PageLinesSection
 							**************************************************/
 							$caption_set = strlen( trim( plmeta('tmrv_caption_set', $io)) ) ? plmeta('tmrv_caption_set', $io) : 'null';
 							$caption_set = ( is_numeric( $caption_set ) ) ? get_term_by( 'id', $caption_set, $this->tax_cap_id)->slug : $caption_set;
-							$captions = $this->get_posts($this->custom_cap_post_type, $this->tax_cap_id, $caption_set);
+							$captions = $this->custom_get_posts($this->custom_cap_post_type, $this->tax_cap_id, $caption_set);
 					?>
 						<li data-transition="<?php echo $transition ?>" data-slotamount="<?php echo $slots ?>" data-masterspeed="<?php echo $masterspeed ?>" <?php echo $link ?> <?php echo $link_target ?>>
 							<img src="<?php echo $img_src ?>">
@@ -804,7 +804,6 @@ class TMSORevolution extends PageLinesSection
 			'singular_label' => __('Slide', 'sophistique'),
 			'description'    => __('', 'sophistique'),
 			'taxonomies'     => array( $this->tax_id ),
-			'menu_icon'      => $this->icon,
 			'supports'       => array('title', 'editor')
 		);
 		$taxonomies = array(
@@ -828,7 +827,6 @@ class TMSORevolution extends PageLinesSection
 			'singular_label' => __('Caption', 'sophistique'),
 			'description'    => __('', 'sophistique'),
 			'taxonomies'     => array( $this->tax_cap_id ),
-			'menu_icon'      => $this->icon,
 			'supports'       => array('title', 'editor')
 		);
 		$taxonomies = array(
@@ -863,7 +861,7 @@ class TMSORevolution extends PageLinesSection
 		}
 	}
 
-	function get_posts( $custom_post, $tax_id, $set = null, $limit = null){
+	function custom_get_posts( $custom_post, $tax_id, $set = null, $limit = null){
 		$query                 = array();
 		$query['orderby']      = 'ID';
 		$query['post_type']    = $custom_post;
