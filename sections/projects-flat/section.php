@@ -90,13 +90,13 @@ class TMPortfolioFlat extends PageLinesSection{
                         <div class="project-nav">
                             <div class="nav-wrapper">
                                 <a href="#" class="arrowleft">
-                                    <i class=" icon-chevron-left"></i>
+                                    <i class="icon icon-chevron-left"></i>
                                 </a>
                                 <a href="#" class="arrowright">
-                                    <i class=" icon-chevron-right"></i>
+                                    <i class="icon icon-chevron-right"></i>
                                 </a>
                                 <a href="#" class="navclose">
-                                    <i class="icon-remove"></i>
+                                    <i class="icon icon-remove"></i>
                                 </a>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ class TMPortfolioFlat extends PageLinesSection{
                         <div class="pf-image">
                             <?php echo get_the_post_thumbnail($post->ID, 'project-thum'); ?>
                             <div class="mask"></div>
-                            <div class="plus"><i class="icon-link"></i></div>
+                            <div class="plus"><i class="icon icon-link"></i></div>
                         </div>
                         <div class="pf-info">
                             <h4 class="zmb"><?php echo $post->post_title;?></h4>

@@ -208,7 +208,7 @@ class TMTeammateFlat extends PageLinesSection {
                                         break;
                                 }
                             ?>
-                                <li data-toggle="tooltip" title="<?php echo ucfirst($name) ?>"><a href="<?php echo $link ?>"><span class="<?php echo $name ?>"><i class="icon-<?php echo $class ?>"></i></span></a></li>
+                                <li data-toggle="tooltip" title="<?php echo ucfirst($name) ?>"><a href="<?php echo $link ?>"><span class="<?php echo $name ?>"><i class="icon icon-<?php echo $class ?>"></i></span></a></li>
                             <?php endforeach ?>
                         </ul>
                         <div class="clear"></div>
@@ -244,7 +244,7 @@ class TMTeammateFlat extends PageLinesSection {
                                     break;
                             }
                         ?>
-                            <li data-toggle="tooltip" title="<?php echo ucfirst($name) ?>"><a href="<?php echo $link ?>"><span class="<?php echo $name ?>"><i class="icon-<?php echo $class ?>"></i></span></a></li>
+                            <li data-toggle="tooltip" title="<?php echo ucfirst($name) ?>"><a href="<?php echo $link ?>"><span class="<?php echo $name ?>"><i class="icon icon-<?php echo $class ?>"></i></span></a></li>
                         <?php endforeach ?>
                     </ul>
                     <div class="member-avatar <?php echo isset($teammate['external']) ? 'link' : '' ;?>">

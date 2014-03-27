@@ -230,7 +230,7 @@ class CollapserFlatTm extends PageLinesSection
                     <div class="collapser-heading '.$active.'" id="'.$parent.'-collapser-'.$post->ID.'">
                       <a class="collapser-toggle" data-toggle="collapse" data-parent="#'.$parent.'" href="#'.$parent.'-'.$post->ID.'" data-image="'.$image.'">
                             <span class="plus-min">
-                                <i class="icon-plus"></i>
+                                <i class="icon icon-plus"></i>
                             </span>
                             <span class="title-head">
                                 '.get_the_title().'

@@ -15,8 +15,7 @@ class TMStarBarsFlatten extends PageLinesSection {
 	var $default_limit = 3;
 
 	function section_styles(){
-
-		wp_enqueue_script( 'starbar', $this->base_url.'/starbar-flat.js', array( 'pagelines-viewport', 'pagelines-easing' ), PL_CORE_VERSION, true );
+		wp_enqueue_script( 'starbar', $this->base_url.'/starbar-flat.js', '', PL_CORE_VERSION, true );
 
 	}
 
@@ -103,7 +102,7 @@ class TMStarBarsFlatten extends PageLinesSection {
 
 
 			$options[] = array(
-				'title' 	=> __( '<i class="icon-star"></i> StarBar #', 'pagelines' ) . $i,
+				'title' 	=> __( '<i class="icon icon-star"></i> StarBar #', 'pagelines' ) . $i,
 				'type' 		=> 'multi',
 				'opts' 		=> $opts,
 
