@@ -168,7 +168,7 @@ class tmiBox extends PageLinesSection {
 
 				$text = sprintf('<div data-sync="ibox_flat_array_item%s_text">%s</div>', $count, $text );
 				$title = sprintf('<h4 data-sync="ibox_flat_array_item%s_title">%s</h4>', $count, $title );
-				$text_link = ($link) ? sprintf('<div class="ibox-link"><a href="%s">%s <i class="icon-angle-right"></i></a></div>', $link, __('More', 'pagelines')) : '';
+				$text_link = ($link) ? sprintf('<div class="ibox-link"><a href="%s">%s <i class="icon icon-angle-right"></i></a></div>', $link, __('More', 'pagelines')) : '';
 
 
 				$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
@@ -183,7 +183,7 @@ class tmiBox extends PageLinesSection {
 						$icons = pl_icon_array();
 						$icon = $icons[ array_rand($icons) ];
 					}
-					$media_html = sprintf('<i class="flat-icon icon-3x icon-%s"></i>', $icon);
+					$media_html = sprintf('<i class="icon flat-icon icon-3x icon-%s"></i>', $icon);
 
 				} elseif( $media_type == 'image' ){
 
@@ -283,7 +283,7 @@ class tmiBox extends PageLinesSection {
 
 				// LINK
 				$link = $this->opt('ibox_flat_link_'.$i);
-				$text_link = ($link) ? sprintf('<div class="ibox-link"><a href="%s">%s <i class="icon-angle-right"></i></a></div>', $link, __('More', 'pagelines')) : '';
+				$text_link = ($link) ? sprintf('<div class="ibox-link"><a href="%s">%s <i class="icon icon-angle-right"></i></a></div>', $link, __('More', 'pagelines')) : '';
 
 
 				$format_class = ($media_format == 'left') ? 'media left-aligned' : 'top-aligned';
@@ -298,7 +298,7 @@ class tmiBox extends PageLinesSection {
 						$icons = pl_icon_array();
 						$media = $icons[ array_rand($icons) ];
 					}
-					$media_html = sprintf('<i class="icon-3x icon-%s"></i>', $media);
+					$media_html = sprintf('<i class="icon icon-3x icon-%s"></i>', $media);
 
 				} elseif( $media_type == 'image' ){
 

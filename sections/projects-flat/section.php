@@ -20,8 +20,10 @@ class TMPortfolioFlat extends PageLinesSection{
 
     var $tax_id           = 'project_flat_sets';
     var $custom_post_type = 'project_flat_post';
+    var $icon;
 
     function section_persistent(){
+    	$this->icon = $this->base_url .'/icon.png';
         add_action('wp_ajax_load_project', array($this, 'get_project'));
         add_action('wp_ajax_nopriv_load_project', array($this, 'get_project'));
         add_image_size( 'project-thum', 420 , 300, true );
@@ -54,7 +56,7 @@ class TMPortfolioFlat extends PageLinesSection{
             }
         }
 
-        $posts = $this->get_posts($this->custom_post_type, $this->tax_id, $filter, $limit);
+        $posts = $this->custom_get_posts($this->custom_post_type, $this->tax_id, $filter, $limit);
 
         if( !count( $posts ) ){
             echo setup_section_notify($this, __('Sorry,there are no post to display.', 'flatten'), get_admin_url().'edit.php?post_type='.$this->custom_post_type, __('Please create some posts', 'flatten'));
@@ -90,13 +92,13 @@ class TMPortfolioFlat extends PageLinesSection{
                         <div class="project-nav">
                             <div class="nav-wrapper">
                                 <a href="#" class="arrowleft">
-                                    <i class=" icon-chevron-left"></i>
+                                    <i class="icon icon-chevron-left"></i>
                                 </a>
                                 <a href="#" class="arrowright">
-                                    <i class=" icon-chevron-right"></i>
+                                    <i class="icon icon-chevron-right"></i>
                                 </a>
                                 <a href="#" class="navclose">
-                                    <i class="icon-remove"></i>
+                                    <i class="icon icon-remove"></i>
                                 </a>
                             </div>
                         </div>
@@ -128,7 +130,7 @@ class TMPortfolioFlat extends PageLinesSection{
                         <div class="pf-image">
                             <?php echo get_the_post_thumbnail($post->ID, 'project-thum'); ?>
                             <div class="mask"></div>
-                            <div class="plus"><i class="icon-link"></i></div>
+                            <div class="plus"><i class="icon icon-link"></i></div>
                         </div>
                         <div class="pf-info">
                             <h4 class="zmb"><?php echo $post->post_title;?></h4>
@@ -218,7 +220,7 @@ class TMPortfolioFlat extends PageLinesSection{
             'singular_label' => __('Project', 'flatten'),
             'description'    => __('', 'flatten'),
             'taxonomies'     => array( $this->tax_id ),
-            'menu_icon'      => $this->icon,
+            'menu_icon'			 => $this->icon,
             'supports'       => array( 'title', 'editor', 'thumbnail')
         );
         $taxonomies = array(
@@ -268,7 +270,7 @@ class TMPortfolioFlat extends PageLinesSection{
         return $meta_boxes;
     }
 
-    function get_posts( $custom_post, $tax_id, $set = null, $limit = null){
+    function custom_get_posts( $custom_post, $tax_id, $set = null, $limit = null){
         $query              = array();
         $query['orderby']   = 'ID';
         $query['post_type'] = $custom_post;
