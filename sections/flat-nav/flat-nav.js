@@ -96,7 +96,7 @@ $.fn.smartFlatMenu = function(options) {
         $el.find('a').contents().wrap('<span/>')
         if( matches ){
             $el.removeClass(matches[0]);
-            $('<i/>').addClass(matches[0]).prependTo( $el.find('>a') );
+            $('<i/>').addClass(matches[0]).addClass('icon').prependTo( $el.find('>a') );
             $('<span/>').addClass('colored').prependTo($el);
         }
     });
