@@ -20,8 +20,10 @@ class TMPortfolioFlat extends PageLinesSection{
 
     var $tax_id           = 'project_flat_sets';
     var $custom_post_type = 'project_flat_post';
+    var $icon;
 
     function section_persistent(){
+    	$this->icon = $this->base_url .'/icon.png';
         add_action('wp_ajax_load_project', array($this, 'get_project'));
         add_action('wp_ajax_nopriv_load_project', array($this, 'get_project'));
         add_image_size( 'project-thum', 420 , 300, true );
@@ -218,6 +220,7 @@ class TMPortfolioFlat extends PageLinesSection{
             'singular_label' => __('Project', 'flatten'),
             'description'    => __('', 'flatten'),
             'taxonomies'     => array( $this->tax_id ),
+            'menu_icon'			 => $this->icon,
             'supports'       => array( 'title', 'editor', 'thumbnail')
         );
         $taxonomies = array(

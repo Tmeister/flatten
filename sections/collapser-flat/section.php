@@ -27,10 +27,12 @@ class CollapserFlatTm extends PageLinesSection
     var $section_version   = '2.2';
     var $section_key ;
     var $chavezShop;
+    var $icon;
 
 
     function section_persistent()
     {
+    	$this->icon = $this->base_url .'/icon.png';
         $this->post_type_setup();
         add_filter( 'cmb_meta_boxes', array(&$this, 'meta_boxes') );
     }
@@ -281,6 +283,7 @@ class CollapserFlatTm extends PageLinesSection
             'singular_label' => __('Post', 'flatten'),
             'description'    => __('', 'flatten'),
             'taxonomies'     => array( $this->tax_id ),
+            'menu_icon'      => $this->icon,
             'supports'       => array( 'title', 'editor')
         );
         $taxonomies = array(

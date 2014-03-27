@@ -32,8 +32,11 @@ class TMSORevolution extends PageLinesSection
 
 	var $slides = null;
 
+	var $icon;
+
 	function section_persistent()
 	{
+		$this->icon = $this->base_url .'/icon.png';
 		$this->post_type_slider_setup();
 		$this->post_type_caption_setup();
 		//$this->post_meta_setup();
@@ -804,6 +807,7 @@ class TMSORevolution extends PageLinesSection
 			'singular_label' => __('Slide', 'sophistique'),
 			'description'    => __('', 'sophistique'),
 			'taxonomies'     => array( $this->tax_id ),
+			'menu_icon'      => $this->icon,
 			'supports'       => array('title', 'editor')
 		);
 		$taxonomies = array(
@@ -827,6 +831,7 @@ class TMSORevolution extends PageLinesSection
 			'singular_label' => __('Caption', 'sophistique'),
 			'description'    => __('', 'sophistique'),
 			'taxonomies'     => array( $this->tax_cap_id ),
+			'menu_icon'      => $this->icon,
 			'supports'       => array('title', 'editor')
 		);
 		$taxonomies = array(
