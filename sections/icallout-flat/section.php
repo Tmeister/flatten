@@ -77,7 +77,7 @@ class tmiCalloutFlat extends PageLinesSection {
 		$format    = ( $this->opt('icallout_flat_format') ) ? 'format-'.$this->opt('icallout_flat_format') : 'format-inline';
 		$link      = $this->opt('icallout_flat_link');
 		$theme     = ($this->opt('icallout_flat_btn_theme')) ? $this->opt('icallout_flat_btn_theme') : 'btn-primary';
-		$link_text = ( $this->opt('icallout_flat_link_text') ) ? $this->opt('icallout_flat_link_text') : 'Learn More <i class="icon-angle-right"></i>';
+		$link_text = ( $this->opt('icallout_flat_link_text') ) ? $this->opt('icallout_flat_link_text') : 'Learn More <i class="icon icon-angle-right"></i>';
 		$bg        = ( $this->opt('icallout_flat_bg_color') ) ? pl_hashify($this->opt('icallout_flat_bg_color')) : '#0079FF';
 		$color     = ( $this->opt('icallout_flat_text_color') ) ? pl_hashify($this->opt('icallout_flat_text_color')) : '#ffffff';
 		if(!$text && !$link){

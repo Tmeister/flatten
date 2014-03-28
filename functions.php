@@ -13,7 +13,7 @@ function activation_url( $url ){
 class Flatten {
 
 	var $theme_name      = 'Flatten';
-    var $theme_version   = '1.1';
+    var $theme_version   = '2.0';
     var $theme_key;
     var $chavezShop;
 
@@ -70,7 +70,7 @@ class Flatten {
         $collapser_opts = array(
             'key'   => 'flatten_license_key',
             'type'  => 'text',
-            'title' => '<i class="icon-shopping-cart"></i> ' . __('Flatten License Key', 'flatten') . $valid,
+            'title' => '<i class="icon icon-shopping-cart"></i> ' . __('Flatten License Key', 'flatten') . $valid,
             'label' => __('License Key', 'flatten'),
             'help'  => __('The theme is fully functional whitout a key license, this license is used only get access to autoupdates within your admin.', 'flatten')
 
