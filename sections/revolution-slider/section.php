@@ -48,9 +48,6 @@ class TMSORevolution extends PageLinesSection
 	}
 
 	function section_head(){
-		if( !is_front_page() && !pl_draft_mode() ){
- 			return;
- 		}
  		$clone_id = null;
 		global $post, $pagelines_ID;
 		$oset            = array('post_id' => $pagelines_ID, 'clone_id' => $clone_id);
@@ -93,9 +90,6 @@ class TMSORevolution extends PageLinesSection
 	}
 
  	function section_template( $clone_id = null ) {
- 		if( !is_front_page() && !pl_draft_mode()  ){
- 			return;
- 		}
 		global $post, $pagelines_ID;
 		$oset         = array('post_id' => $pagelines_ID, 'clone_id' => $clone_id);
 		$tmrv_items   = ( $this->opt('tmrv_items', $oset) ) ? $this->opt('tmrv_items', $oset) : '10';

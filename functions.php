@@ -13,7 +13,7 @@ function activation_url( $url ){
 class Flatten {
 
 	var $theme_name      = 'Flatten';
-    var $theme_version   = '2.0';
+    var $theme_version   = '2.1';
     var $theme_key;
     var $chavezShop;
 
